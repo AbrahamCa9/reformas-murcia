@@ -1,0 +1,98 @@
+{
+ "consulta": "empresa de reformas en Ceutí Murcia",
+ "fuente": "Google Maps · Places API (búsqueda de texto) vía conector SEO Personal",
+ "fecha": "2026-11-10",
+ "nota": "La posición es la de la búsqueda de Places, que se aproxima al Local Pack pero no es idéntica.",
+ "resultados": [
+  {
+   "posicion": 1,
+   "nombre": "Compactaciones Ceutí / Empresa de Compactaciones y obra civil en Murcia",
+   "categoria": "Contratista general",
+   "valoracion": 4.2,
+   "resenas": 19,
+   "web": "https://www.compactacionesceuti.com/",
+   "localidad": "Ceutí"
+  },
+  {
+   "posicion": 2,
+   "nombre": "Tecu Reformas",
+   "categoria": "Servicios",
+   "valoracion": 5.0,
+   "resenas": 15,
+   "web": "https://tecureformas.es/",
+   "localidad": "Murcia (El Palmar)"
+  },
+  {
+   "posicion": 3,
+   "nombre": "Estructuras J.A. Miralles y P. Martí C.B.",
+   "categoria": "Servicios",
+   "valoracion": null,
+   "resenas": 0,
+   "web": null,
+   "localidad": "Ceutí"
+  },
+  {
+   "posicion": 4,
+   "nombre": "GGP GENERAL GLOBAL PROJECTS",
+   "categoria": "Servicios",
+   "valoracion": 4.6,
+   "resenas": 5,
+   "web": "http://www.generalglobalprojects.com/",
+   "localidad": "Ceutí"
+  },
+  {
+   "posicion": 5,
+   "nombre": "Traza Ingeniería y Desarrollo, S.L.",
+   "categoria": "Servicios",
+   "valoracion": 5.0,
+   "resenas": 8,
+   "web": "https://www.trazaingenieria.es/",
+   "localidad": "Ceutí"
+  },
+  {
+   "posicion": 6,
+   "nombre": "GREEN STEEL ESTRUCTURAS",
+   "categoria": "Servicios",
+   "valoracion": 5.0,
+   "resenas": 1,
+   "web": "http://www.greensteelestructuras.com/",
+   "localidad": "Ceutí"
+  },
+  {
+   "posicion": 7,
+   "nombre": "Excavaciones El Socra Ceuti",
+   "categoria": "Contratista general",
+   "valoracion": 5.0,
+   "resenas": 3,
+   "web": "https://excavacioneselsocra.jimdofree.com/",
+   "localidad": "Ceutí"
+  },
+  {
+   "posicion": 8,
+   "nombre": "Reformas y construcciones Costel",
+   "categoria": "Contratista general",
+   "valoracion": 5.0,
+   "resenas": 36,
+   "web": "http://reformasyconstruccionescostel.com/",
+   "localidad": "San Pedro del Pinatar"
+  },
+  {
+   "posicion": 9,
+   "nombre": "Canalones Ceuti C.B",
+   "categoria": "Empresa de instalación de cubiertas",
+   "valoracion": 4.0,
+   "resenas": 14,
+   "web": "https://www.canalonesceuti.com/",
+   "localidad": "Ceutí"
+  },
+  {
+   "posicion": 10,
+   "nombre": "Mantenimientos Casherman, S.L.",
+   "categoria": "Contratista general",
+   "valoracion": 5.0,
+   "resenas": 6,
+   "web": null,
+   "localidad": "Ceutí"
+  }
+ ]
+}

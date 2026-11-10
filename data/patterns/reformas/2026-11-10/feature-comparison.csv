@@ -1,0 +1,20 @@
+feature,grupo_A_si,grupo_A_n,grupo_B_si,grupo_B_n,directorios_si,directorios_n,prioridad,facilidad,decision_blueprint
+title con servicio + ciudad,3,3,2,2,2,2,HIGH,easy,title {servicio} en {ciudad} | {marca}
+H1 con servicio + ciudad,2,3,2,2,2,2,HIGH,easy,H1 {servicio} en {ciudad}
+ficha de Google enlaza a landing servicio + ciudad,2,3,0,2,,,HIGH,easy,home orientada a empresa de reformas en Murcia
+servicios con URL propia,2,3,2,2,,,HIGH,easy,pilar /servicios/{servicio}/
+CTA presupuesto gratis / sin compromiso,3,3,2,2,2,2,HIGH,easy,CTA principal Pide presupuesto gratis
+teléfono en cabecera,2,3,1,2,,,HIGH,easy,teléfono en cabecera
+WhatsApp,2,3,0,2,,,HIGH,easy,botón WhatsApp + barra fija
+barra fija Llamar/WhatsApp/Presupuesto,1,3,0,2,,,HIGH,easy,barra fija móvil
+LCP móvil <= 2.5 s,0,3,0,2,,,HIGH,easy,presupuesto Lighthouse LCP <= 2.5 s
+páginas servicio x pueblo con contenido real,0,3,0,2,0,2,HIGH,medium,/{servicio}/{pueblo}/ con >= 150 palabras únicas
+páginas por pueblo,0,3,1,2,2,2,HIGH,medium,hub /zonas/{pueblo}/
+FAQ en la página,1,3,0,2,0,2,MEDIUM,easy,FAQ + FAQPage en servicio y pueblo
+proceso por pasos,2,3,1,2,1,2,MEDIUM,easy,proceso en 5 pasos
+orientación de precio,1,3,1,2,1,2,MEDIUM,easy,bloque cuánto cuesta (sin inventar cifras)
+migas de pan,0,3,0,2,2,2,MEDIUM,easy,breadcrumbs + BreadcrumbList
+reseñas visibles en la web,1,3,0,2,,,MEDIUM,hard,bloque de reseñas solo con reseñas reales
+fotos de obras reales / antes-después,3,3,2,2,,,MEDIUM,medium,galería cuando haya fotos propias
+años de experiencia / certificaciones,2,3,1,2,,,LOW,easy,campos opcionales en negocio.yaml
+ayudas y subvenciones,1,3,1,2,,,LOW,easy,pregunta FAQ sobre ayudas

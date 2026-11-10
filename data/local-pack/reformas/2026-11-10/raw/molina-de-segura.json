@@ -1,0 +1,89 @@
+{
+ "consulta": "empresa de reformas en Molina de Segura",
+ "fuente": "Google Maps · Places API (búsqueda de texto) vía conector SEO Personal",
+ "fecha": "2026-11-10",
+ "nota": "La posición es la de la búsqueda de Places, que se aproxima al Local Pack pero no es idéntica.",
+ "resultados": [
+  {
+   "posicion": 1,
+   "nombre": "⭐Reformas integrales Murcia - Habitapro",
+   "categoria": "Servicios",
+   "valoracion": 5.0,
+   "resenas": 12,
+   "web": "https://www.habitapro.es/",
+   "localidad": "Molina de Segura"
+  },
+  {
+   "posicion": 2,
+   "nombre": "Reformas Integrales Art Design",
+   "categoria": "Servicios",
+   "valoracion": 4.9,
+   "resenas": 7,
+   "web": "https://art-design.es/",
+   "localidad": "Molina de Segura"
+  },
+  {
+   "posicion": 3,
+   "nombre": "FEHUDA construcciones y reformas",
+   "categoria": "Servicios",
+   "valoracion": 5.0,
+   "resenas": 1,
+   "web": null,
+   "localidad": "Molina de Segura"
+  },
+  {
+   "posicion": 4,
+   "nombre": "Fc Lozano Construcciones y Reformas",
+   "categoria": "Servicios",
+   "valoracion": 4.0,
+   "resenas": 4,
+   "web": "https://fclozano.com/",
+   "localidad": "Molina de Segura"
+  },
+  {
+   "posicion": 5,
+   "nombre": "Construcciones y Reformas J.L.",
+   "categoria": "Servicios",
+   "valoracion": null,
+   "resenas": 0,
+   "web": null,
+   "localidad": "Molina de Segura"
+  },
+  {
+   "posicion": 6,
+   "nombre": "Construcciones Hugo y Fulgencio.S.L",
+   "categoria": "Servicios",
+   "valoracion": 4.0,
+   "resenas": 4,
+   "web": null,
+   "localidad": "Molina de Segura"
+  },
+  {
+   "posicion": 7,
+   "nombre": "Mantenimientos Integrales Gómez",
+   "categoria": "Servicios",
+   "valoracion": 5.0,
+   "resenas": 2,
+   "web": null,
+   "localidad": "Molina de Segura"
+  },
+  {
+   "posicion": 8,
+   "nombre": "Promociones y Construcciones Luis Molina y J Aguilar SL",
+   "categoria": "Servicios",
+   "valoracion": 4.8,
+   "resenas": 8,
+   "web": "http://promocionesyconstrucciones.com/",
+   "localidad": "Molina de Segura"
+  },
+  {
+   "posicion": 9,
+   "nombre": "REFORMAS INTEGRALES EN MOLINA DE SEGURA",
+   "categoria": "Servicios",
+   "valoracion": null,
+   "resenas": 0,
+   "web": "https://reformasbaratasmurcia.jimdofree.com/",
+   "localidad": "Molina de Segura"
+  }
+ ]
+}

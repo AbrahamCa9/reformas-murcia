@@ -1,0 +1,70 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# MAPA DE URLs · Fase 4 (web-blueprint-generator)
+#
+# Este archivo decide QUÉ páginas existen. El texto de cada página vive en
+# src/content/ (servicios, zonas y landings).
+#
+# Para añadir un pueblo o un servicio:
+#   1. Añádelo aquí.
+#   2. Ejecuta `npm run generar` (te dice qué falta) y `npm run generar -- --aplicar`
+#      (crea los borradores que el agente rellena con texto único).
+#   3. `npm run verificar` antes de hacer commit.
+#
+# Si un slug cambia, añade una redirección 301 en src/data/redirecciones.yaml.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Ciudad que trabajan las páginas pilar /servicios/{servicio}/ y la home.
+ciudad_principal: Murcia
+
+# Tope de seguridad de páginas servicio × pueblo (el generador avisa antes de pasarlo).
+limite_servicio_x_zona: 60
+
+# Páginas pilar: /servicios/{slug}/  (orden = orden en el menú)
+servicios:
+  - reformas-integrales
+  - reforma-de-banos
+  - reforma-de-cocinas
+  - cambio-de-banera-por-plato-de-ducha
+  - reforma-de-fachadas
+  - instalaciones-electricas
+  - fontaneria
+  - reforma-de-garajes
+  - reforma-de-locales-y-oficinas
+  - pintura
+  - pladur-y-falsos-techos
+  - impermeabilizacion-de-cubiertas-y-terrazas
+
+# Páginas hub por pueblo: /zonas/{slug}/
+zonas:
+  - molina-de-segura
+  - alcantarilla
+  - ceuti
+
+# Páginas servicio × pueblo: /{servicio}/{zona}/  ← el corazón del SEO local
+servicio_x_zona:
+  - servicio: reformas-integrales
+    zonas: [molina-de-segura, alcantarilla, ceuti]
+  - servicio: reforma-de-banos
+    zonas: [molina-de-segura, alcantarilla, ceuti]
+  - servicio: reforma-de-cocinas
+    zonas: [molina-de-segura, alcantarilla, ceuti]
+
+# Páginas fijas
+paginas: [servicios, zonas, sobre-nosotros, contacto]
+legales: [aviso-legal, politica-de-privacidad, politica-de-cookies]
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PRÓXIMAS FASES (no se generan hasta moverlas arriba)
+# Criterio: primero donde la competencia es floja (ver data/patterns/.../hypotheses.md)
+# y siempre con texto local real. Nunca cientos de páginas plantilla de golpe.
+# ─────────────────────────────────────────────────────────────────────────────
+proximas_fases:
+  fase_2:
+    servicio_x_zona_nuevo:
+      - servicio: cambio-de-banera-por-plato-de-ducha
+        zonas: [molina-de-segura, alcantarilla, ceuti]
+      - servicio: reforma-de-fachadas
+        zonas: [molina-de-segura, alcantarilla, ceuti]
+    zonas_nuevas: [las-torres-de-cotillas, alguazas, lorqui, archena, santomera]
+  fase_3:
+    zonas_nuevas: [cartagena, lorca, san-javier, torre-pacheco, cieza, totana]

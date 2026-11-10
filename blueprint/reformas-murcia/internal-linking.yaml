@@ -1,0 +1,23 @@
+# Plan de enlazado interno · Fase 4
+# Lo aplican las plantillas de la web y lo comprueba `npm run qa`.
+
+home:
+  enlaza_a: [todos_los_servicios, todas_las_zonas, contacto]
+
+servicio_pilar:
+  enlaza_a: [sus_paginas_por_pueblo, servicios_relacionados, zonas]
+  relacionados_min: 3
+
+servicio_zona:
+  hermanas_min: 3            # el mismo servicio en otros pueblos (si hay menos, todas)
+  enlace_a_pilar: true       # /servicios/{servicio}/
+  enlace_a_hub_zona: true    # /zonas/{pueblo}/
+  otros_servicios_min: 2     # otros servicios en el mismo pueblo o sus pilares
+
+hub_zona:
+  enlaza_a: [servicios_del_pueblo, resto_de_servicios, zonas_cercanas]
+
+pie_de_pagina: [servicios, zonas, legales]
+
+# Ninguna página a más de 3 clics de la home.
+profundidad_max_clics: 3

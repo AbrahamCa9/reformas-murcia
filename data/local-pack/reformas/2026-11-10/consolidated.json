@@ -1,0 +1,774 @@
+[
+ {
+  "id": "creativainteriorismoyreformas.com",
+  "nombre": "CREATIVA Interiorismo & Reformas S.L",
+  "dominio": "creativainteriorismoyreformas.com",
+  "url_ficha": "https://creativainteriorismoyreformas.com/reformas_integrales_murcia/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Murcia",
+  "valoracion": 4.9,
+  "resenas": 90,
+  "busquedas": [
+   {
+    "localidad": "murcia",
+    "posicion": 1
+   }
+  ]
+ },
+ {
+  "id": "concamar.com",
+  "nombre": "CONCAMAR - Reformas integrales",
+  "dominio": "concamar.com",
+  "url_ficha": "https://www.concamar.com/empresa-de-reformas-en-murcia/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Alcantarilla",
+  "valoracion": 4.6,
+  "resenas": 73,
+  "busquedas": [
+   {
+    "localidad": "alcantarilla",
+    "posicion": 1
+   }
+  ]
+ },
+ {
+  "id": "reformasmartinez.com",
+  "nombre": "Reformas Martínez",
+  "dominio": "reformasmartinez.com",
+  "url_ficha": "http://reformasmartinez.com/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Alcantarilla",
+  "valoracion": 5,
+  "resenas": 67,
+  "busquedas": [
+   {
+    "localidad": "alcantarilla",
+    "posicion": 2
+   }
+  ]
+ },
+ {
+  "id": "jogris.es",
+  "nombre": "Jogris",
+  "dominio": "jogris.es",
+  "url_ficha": "https://www.jogris.es/",
+  "categoria": "Contratista general",
+  "localidad_ficha": "Murcia",
+  "valoracion": 4.9,
+  "resenas": 48,
+  "busquedas": [
+   {
+    "localidad": "murcia",
+    "posicion": 6
+   }
+  ]
+ },
+ {
+  "id": "aedes5punto0.com",
+  "nombre": "Aedes 5.0",
+  "dominio": "aedes5punto0.com",
+  "url_ficha": "https://aedes5punto0.com/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Murcia",
+  "valoracion": 4.9,
+  "resenas": 47,
+  "busquedas": [
+   {
+    "localidad": "murcia",
+    "posicion": 10
+   }
+  ]
+ },
+ {
+  "id": "marinointeriorismo.com",
+  "nombre": "Marino interiorismo",
+  "dominio": "marinointeriorismo.com",
+  "url_ficha": "https://www.marinointeriorismo.com/",
+  "categoria": "Contratista general",
+  "localidad_ficha": "Murcia",
+  "valoracion": 4.6,
+  "resenas": 37,
+  "busquedas": [
+   {
+    "localidad": "murcia",
+    "posicion": 19
+   }
+  ]
+ },
+ {
+  "id": "reformasyconstruccionescostel.com",
+  "nombre": "Reformas y construcciones Costel",
+  "dominio": "reformasyconstruccionescostel.com",
+  "url_ficha": "http://reformasyconstruccionescostel.com/",
+  "categoria": "Contratista general",
+  "localidad_ficha": "San Pedro del Pinatar",
+  "valoracion": 5,
+  "resenas": 36,
+  "busquedas": [
+   {
+    "localidad": "ceuti",
+    "posicion": 8
+   }
+  ]
+ },
+ {
+  "id": "domusnovamurcia.es",
+  "nombre": "Domus Nova",
+  "dominio": "domusnovamurcia.es",
+  "url_ficha": "https://domusnovamurcia.es/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Murcia",
+  "valoracion": 4.5,
+  "resenas": 31,
+  "busquedas": [
+   {
+    "localidad": "murcia",
+    "posicion": 8
+   }
+  ]
+ },
+ {
+  "id": "hogargo.es",
+  "nombre": "HogarGo - Reformas Integrales en Murcia",
+  "dominio": "hogargo.es",
+  "url_ficha": "https://hogargo.es/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Murcia",
+  "valoracion": 5,
+  "resenas": 28,
+  "busquedas": [
+   {
+    "localidad": "murcia",
+    "posicion": 7
+   }
+  ]
+ },
+ {
+  "id": "proycoalcantarilla.com",
+  "nombre": "Proyco Alcantarilla S.L.",
+  "dominio": "proycoalcantarilla.com",
+  "url_ficha": "http://www.proycoalcantarilla.com/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Alcantarilla",
+  "valoracion": 3.7,
+  "resenas": 26,
+  "busquedas": [
+   {
+    "localidad": "alcantarilla",
+    "posicion": 9
+   }
+  ]
+ },
+ {
+  "id": "introreformas.com",
+  "nombre": "INTRO reformas s.l.",
+  "dominio": "introreformas.com",
+  "url_ficha": "http://www.introreformas.com/",
+  "categoria": "Contratista general",
+  "localidad_ficha": "Murcia",
+  "valoracion": 4.6,
+  "resenas": 25,
+  "busquedas": [
+   {
+    "localidad": "murcia",
+    "posicion": 3
+   }
+  ]
+ },
+ {
+  "id": "proaarquitectura.es",
+  "nombre": "Proa Arquitectura",
+  "dominio": "proaarquitectura.es",
+  "url_ficha": "http://www.proaarquitectura.es/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Alcantarilla",
+  "valoracion": 5,
+  "resenas": 20,
+  "busquedas": [
+   {
+    "localidad": "alcantarilla",
+    "posicion": 10
+   }
+  ]
+ },
+ {
+  "id": "basi servicios",
+  "nombre": "Basi servicios",
+  "dominio": null,
+  "url_ficha": null,
+  "categoria": "Servicios",
+  "localidad_ficha": "Murcia",
+  "valoracion": 5,
+  "resenas": 20,
+  "busquedas": [
+   {
+    "localidad": "murcia",
+    "posicion": 13
+   }
+  ]
+ },
+ {
+  "id": "threformas.es",
+  "nombre": "TH Reformas y construcción",
+  "dominio": "threformas.es",
+  "url_ficha": "http://www.threformas.es/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Alcantarilla",
+  "valoracion": 5,
+  "resenas": 19,
+  "busquedas": [
+   {
+    "localidad": "alcantarilla",
+    "posicion": 3
+   }
+  ]
+ },
+ {
+  "id": "compactacionesceuti.com",
+  "nombre": "Compactaciones Ceutí / Empresa de Compactaciones y obra civil en Murcia",
+  "dominio": "compactacionesceuti.com",
+  "url_ficha": "https://www.compactacionesceuti.com/",
+  "categoria": "Contratista general",
+  "localidad_ficha": "Ceutí",
+  "valoracion": 4.2,
+  "resenas": 19,
+  "busquedas": [
+   {
+    "localidad": "ceuti",
+    "posicion": 1
+   }
+  ]
+ },
+ {
+  "id": "ismael reformas murcia",
+  "nombre": "Ismael Reformas Murcia",
+  "dominio": null,
+  "url_ficha": null,
+  "categoria": "Servicios",
+  "localidad_ficha": "Murcia",
+  "valoracion": 5,
+  "resenas": 19,
+  "busquedas": [
+   {
+    "localidad": "murcia",
+    "posicion": 4
+   }
+  ]
+ },
+ {
+  "id": "urbalix.com",
+  "nombre": "URBALIX Empresa reformas Murcia UERM",
+  "dominio": "urbalix.com",
+  "url_ficha": "https://www.urbalix.com/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Murcia",
+  "valoracion": 4.7,
+  "resenas": 19,
+  "busquedas": [
+   {
+    "localidad": "murcia",
+    "posicion": 12
+   }
+  ]
+ },
+ {
+  "id": "plumbingtecnology.es",
+  "nombre": "Reformas Plumbing Tecnology",
+  "dominio": "plumbingtecnology.es",
+  "url_ficha": "http://www.plumbingtecnology.es/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Alcantarilla",
+  "valoracion": 4,
+  "resenas": 18,
+  "busquedas": [
+   {
+    "localidad": "alcantarilla",
+    "posicion": 6
+   },
+   {
+    "localidad": "murcia",
+    "posicion": 18
+   }
+  ]
+ },
+ {
+  "id": "rostrinium.com",
+  "nombre": "ROSTRINIUM | Reformas Integrales | Murcia | Alicante",
+  "dominio": "rostrinium.com",
+  "url_ficha": "http://rostrinium.com/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Murcia",
+  "valoracion": 3.8,
+  "resenas": 18,
+  "busquedas": [
+   {
+    "localidad": "murcia",
+    "posicion": 15
+   }
+  ]
+ },
+ {
+  "id": "makeobras.com",
+  "nombre": "make obras",
+  "dominio": "makeobras.com",
+  "url_ficha": "https://www.makeobras.com/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Murcia",
+  "valoracion": 5,
+  "resenas": 18,
+  "busquedas": [
+   {
+    "localidad": "murcia",
+    "posicion": 17
+   }
+  ]
+ },
+ {
+  "id": "prolyco.com",
+  "nombre": "Prolyco",
+  "dominio": "prolyco.com",
+  "url_ficha": "http://www.prolyco.com/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Murcia",
+  "valoracion": 4,
+  "resenas": 17,
+  "busquedas": [
+   {
+    "localidad": "alcantarilla",
+    "posicion": 7
+   }
+  ]
+ },
+ {
+  "id": "obdecor.es",
+  "nombre": "Obdecor Reformas y Construcciones",
+  "dominio": "obdecor.es",
+  "url_ficha": "http://www.obdecor.es/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Murcia",
+  "valoracion": 4.3,
+  "resenas": 16,
+  "busquedas": [
+   {
+    "localidad": "murcia",
+    "posicion": 9
+   }
+  ]
+ },
+ {
+  "id": "tecureformas.es",
+  "nombre": "Tecu Reformas",
+  "dominio": "tecureformas.es",
+  "url_ficha": "https://tecureformas.es/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Murcia (El Palmar)",
+  "valoracion": 5,
+  "resenas": 15,
+  "busquedas": [
+   {
+    "localidad": "ceuti",
+    "posicion": 2
+   }
+  ]
+ },
+ {
+  "id": "canalonesceuti.com",
+  "nombre": "Canalones Ceuti C.B",
+  "dominio": "canalonesceuti.com",
+  "url_ficha": "https://www.canalonesceuti.com/",
+  "categoria": "Empresa de instalación de cubiertas",
+  "localidad_ficha": "Ceutí",
+  "valoracion": 4,
+  "resenas": 14,
+  "busquedas": [
+   {
+    "localidad": "ceuti",
+    "posicion": 9
+   }
+  ]
+ },
+ {
+  "id": "cymento.es",
+  "nombre": "CYMENTO - Construcción y Reformas en Murcia",
+  "dominio": "cymento.es",
+  "url_ficha": "https://cymento.es/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Murcia (El Raal)",
+  "valoracion": 5,
+  "resenas": 13,
+  "busquedas": [
+   {
+    "localidad": "murcia",
+    "posicion": 5
+   }
+  ]
+ },
+ {
+  "id": "reformasjp.es",
+  "nombre": "Juan Pedro Reformas e Interiorismo",
+  "dominio": "reformasjp.es",
+  "url_ficha": "http://reformasjp.es/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Murcia",
+  "valoracion": 4.1,
+  "resenas": 13,
+  "busquedas": [
+   {
+    "localidad": "murcia",
+    "posicion": 11
+   }
+  ]
+ },
+ {
+  "id": "estructuraaz.es",
+  "nombre": "Estructura AZ",
+  "dominio": "estructuraaz.es",
+  "url_ficha": "https://www.estructuraaz.es/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Alcantarilla",
+  "valoracion": 5,
+  "resenas": 12,
+  "busquedas": [
+   {
+    "localidad": "alcantarilla",
+    "posicion": 4
+   }
+  ]
+ },
+ {
+  "id": "habitapro.es",
+  "nombre": "⭐Reformas integrales Murcia - Habitapro",
+  "dominio": "habitapro.es",
+  "url_ficha": "https://www.habitapro.es/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Molina de Segura",
+  "valoracion": 5,
+  "resenas": 12,
+  "busquedas": [
+   {
+    "localidad": "molina-de-segura",
+    "posicion": 1
+   }
+  ]
+ },
+ {
+  "id": "natou.es",
+  "nombre": "Natou Proyectos y Reformas",
+  "dominio": "natou.es",
+  "url_ficha": "https://www.natou.es/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Murcia",
+  "valoracion": 5,
+  "resenas": 11,
+  "busquedas": [
+   {
+    "localidad": "murcia",
+    "posicion": 14
+   }
+  ]
+ },
+ {
+  "id": "luciaaleman.es",
+  "nombre": "Lucía Alemán Arquitectura Y Reformas",
+  "dominio": "luciaaleman.es",
+  "url_ficha": "http://www.luciaaleman.es/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Murcia",
+  "valoracion": 5,
+  "resenas": 10,
+  "busquedas": [
+   {
+    "localidad": "murcia",
+    "posicion": 20
+   }
+  ]
+ },
+ {
+  "id": "todoreformasmurcia.es",
+  "nombre": "Todo Reformas",
+  "dominio": "todoreformasmurcia.es",
+  "url_ficha": "https://todoreformasmurcia.es/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Murcia",
+  "valoracion": 4.6,
+  "resenas": 9,
+  "busquedas": [
+   {
+    "localidad": "murcia",
+    "posicion": 2
+   }
+  ]
+ },
+ {
+  "id": "trazaingenieria.es",
+  "nombre": "Traza Ingeniería y Desarrollo, S.L.",
+  "dominio": "trazaingenieria.es",
+  "url_ficha": "https://www.trazaingenieria.es/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Ceutí",
+  "valoracion": 5,
+  "resenas": 8,
+  "busquedas": [
+   {
+    "localidad": "ceuti",
+    "posicion": 5
+   }
+  ]
+ },
+ {
+  "id": "promocionesyconstrucciones.com",
+  "nombre": "Promociones y Construcciones Luis Molina y J Aguilar SL",
+  "dominio": "promocionesyconstrucciones.com",
+  "url_ficha": "http://promocionesyconstrucciones.com/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Molina de Segura",
+  "valoracion": 4.8,
+  "resenas": 8,
+  "busquedas": [
+   {
+    "localidad": "molina-de-segura",
+    "posicion": 8
+   }
+  ]
+ },
+ {
+  "id": "art-design.es",
+  "nombre": "Reformas Integrales Art Design",
+  "dominio": "art-design.es",
+  "url_ficha": "https://art-design.es/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Molina de Segura",
+  "valoracion": 4.9,
+  "resenas": 7,
+  "busquedas": [
+   {
+    "localidad": "molina-de-segura",
+    "posicion": 2
+   }
+  ]
+ },
+ {
+  "id": "encasareformas.es",
+  "nombre": "EnCasa Reformas",
+  "dominio": "encasareformas.es",
+  "url_ficha": "http://www.encasareformas.es/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Murcia",
+  "valoracion": 4.6,
+  "resenas": 7,
+  "busquedas": [
+   {
+    "localidad": "murcia",
+    "posicion": 16
+   }
+  ]
+ },
+ {
+  "id": "mantenimientos casherman, s.l.",
+  "nombre": "Mantenimientos Casherman, S.L.",
+  "dominio": null,
+  "url_ficha": null,
+  "categoria": "Contratista general",
+  "localidad_ficha": "Ceutí",
+  "valoracion": 5,
+  "resenas": 6,
+  "busquedas": [
+   {
+    "localidad": "ceuti",
+    "posicion": 10
+   }
+  ]
+ },
+ {
+  "id": "reformasjofra.es",
+  "nombre": "Reformas Jofra",
+  "dominio": "reformasjofra.es",
+  "url_ficha": "https://www.reformasjofra.es/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Alcantarilla",
+  "valoracion": 5,
+  "resenas": 5,
+  "busquedas": [
+   {
+    "localidad": "alcantarilla",
+    "posicion": 5
+   }
+  ]
+ },
+ {
+  "id": "generalglobalprojects.com",
+  "nombre": "GGP GENERAL GLOBAL PROJECTS",
+  "dominio": "generalglobalprojects.com",
+  "url_ficha": "http://www.generalglobalprojects.com/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Ceutí",
+  "valoracion": 4.6,
+  "resenas": 5,
+  "busquedas": [
+   {
+    "localidad": "ceuti",
+    "posicion": 4
+   }
+  ]
+ },
+ {
+  "id": "reformas y servicios jarb",
+  "nombre": "Reformas y servicios JARB",
+  "dominio": null,
+  "url_ficha": "(solo Facebook)",
+  "categoria": "Servicios",
+  "localidad_ficha": "Alcantarilla",
+  "valoracion": 5,
+  "resenas": 4,
+  "busquedas": [
+   {
+    "localidad": "alcantarilla",
+    "posicion": 8
+   }
+  ]
+ },
+ {
+  "id": "fclozano.com",
+  "nombre": "Fc Lozano Construcciones y Reformas",
+  "dominio": "fclozano.com",
+  "url_ficha": "https://fclozano.com/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Molina de Segura",
+  "valoracion": 4,
+  "resenas": 4,
+  "busquedas": [
+   {
+    "localidad": "molina-de-segura",
+    "posicion": 4
+   }
+  ]
+ },
+ {
+  "id": "construcciones hugo y fulgencio.s.l",
+  "nombre": "Construcciones Hugo y Fulgencio.S.L",
+  "dominio": null,
+  "url_ficha": null,
+  "categoria": "Servicios",
+  "localidad_ficha": "Molina de Segura",
+  "valoracion": 4,
+  "resenas": 4,
+  "busquedas": [
+   {
+    "localidad": "molina-de-segura",
+    "posicion": 6
+   }
+  ]
+ },
+ {
+  "id": "excavacioneselsocra.jimdofree.com",
+  "nombre": "Excavaciones El Socra Ceuti",
+  "dominio": "excavacioneselsocra.jimdofree.com",
+  "url_ficha": "https://excavacioneselsocra.jimdofree.com/",
+  "categoria": "Contratista general",
+  "localidad_ficha": "Ceutí",
+  "valoracion": 5,
+  "resenas": 3,
+  "busquedas": [
+   {
+    "localidad": "ceuti",
+    "posicion": 7
+   }
+  ]
+ },
+ {
+  "id": "mantenimientos integrales gómez",
+  "nombre": "Mantenimientos Integrales Gómez",
+  "dominio": null,
+  "url_ficha": null,
+  "categoria": "Servicios",
+  "localidad_ficha": "Molina de Segura",
+  "valoracion": 5,
+  "resenas": 2,
+  "busquedas": [
+   {
+    "localidad": "molina-de-segura",
+    "posicion": 7
+   }
+  ]
+ },
+ {
+  "id": "greensteelestructuras.com",
+  "nombre": "GREEN STEEL ESTRUCTURAS",
+  "dominio": "greensteelestructuras.com",
+  "url_ficha": "http://www.greensteelestructuras.com/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Ceutí",
+  "valoracion": 5,
+  "resenas": 1,
+  "busquedas": [
+   {
+    "localidad": "ceuti",
+    "posicion": 6
+   }
+  ]
+ },
+ {
+  "id": "fehuda construcciones y reformas",
+  "nombre": "FEHUDA construcciones y reformas",
+  "dominio": null,
+  "url_ficha": null,
+  "categoria": "Servicios",
+  "localidad_ficha": "Molina de Segura",
+  "valoracion": 5,
+  "resenas": 1,
+  "busquedas": [
+   {
+    "localidad": "molina-de-segura",
+    "posicion": 3
+   }
+  ]
+ },
+ {
+  "id": "estructuras j.a. miralles y p. martí c.b.",
+  "nombre": "Estructuras J.A. Miralles y P. Martí C.B.",
+  "dominio": null,
+  "url_ficha": null,
+  "categoria": "Servicios",
+  "localidad_ficha": "Ceutí",
+  "valoracion": null,
+  "resenas": 0,
+  "busquedas": [
+   {
+    "localidad": "ceuti",
+    "posicion": 3
+   }
+  ]
+ },
+ {
+  "id": "construcciones y reformas j.l.",
+  "nombre": "Construcciones y Reformas J.L.",
+  "dominio": null,
+  "url_ficha": null,
+  "categoria": "Servicios",
+  "localidad_ficha": "Molina de Segura",
+  "valoracion": null,
+  "resenas": 0,
+  "busquedas": [
+   {
+    "localidad": "molina-de-segura",
+    "posicion": 5
+   }
+  ]
+ },
+ {
+  "id": "reformasbaratasmurcia.jimdofree.com",
+  "nombre": "REFORMAS INTEGRALES EN MOLINA DE SEGURA",
+  "dominio": "reformasbaratasmurcia.jimdofree.com",
+  "url_ficha": "https://reformasbaratasmurcia.jimdofree.com/",
+  "categoria": "Servicios",
+  "localidad_ficha": "Molina de Segura",
+  "valoracion": null,
+  "resenas": 0,
+  "busquedas": [
+   {
+    "localidad": "molina-de-segura",
+    "posicion": 9
+   }
+  ]
+ }
+]

@@ -1,0 +1,188 @@
+{
+ "consulta": "empresa de reformas en Murcia",
+ "fuente": "Google Maps · Places API (búsqueda de texto) vía conector SEO Personal",
+ "fecha": "2026-11-10",
+ "nota": "La posición es la de la búsqueda de Places, que se aproxima al Local Pack pero no es idéntica.",
+ "resultados": [
+  {
+   "posicion": 1,
+   "nombre": "CREATIVA Interiorismo & Reformas S.L",
+   "categoria": "Servicios",
+   "valoracion": 4.9,
+   "resenas": 90,
+   "web": "https://creativainteriorismoyreformas.com/reformas_integrales_murcia/",
+   "localidad": "Murcia"
+  },
+  {
+   "posicion": 2,
+   "nombre": "Todo Reformas",
+   "categoria": "Servicios",
+   "valoracion": 4.6,
+   "resenas": 9,
+   "web": "https://todoreformasmurcia.es/",
+   "localidad": "Murcia"
+  },
+  {
+   "posicion": 3,
+   "nombre": "INTRO reformas s.l.",
+   "categoria": "Contratista general",
+   "valoracion": 4.6,
+   "resenas": 25,
+   "web": "http://www.introreformas.com/",
+   "localidad": "Murcia"
+  },
+  {
+   "posicion": 4,
+   "nombre": "Ismael Reformas Murcia",
+   "categoria": "Servicios",
+   "valoracion": 5.0,
+   "resenas": 19,
+   "web": null,
+   "localidad": "Murcia"
+  },
+  {
+   "posicion": 5,
+   "nombre": "CYMENTO - Construcción y Reformas en Murcia",
+   "categoria": "Servicios",
+   "valoracion": 5.0,
+   "resenas": 13,
+   "web": "https://cymento.es/",
+   "localidad": "Murcia (El Raal)"
+  },
+  {
+   "posicion": 6,
+   "nombre": "Jogris",
+   "categoria": "Contratista general",
+   "valoracion": 4.9,
+   "resenas": 48,
+   "web": "https://www.jogris.es/",
+   "localidad": "Murcia"
+  },
+  {
+   "posicion": 7,
+   "nombre": "HogarGo - Reformas Integrales en Murcia",
+   "categoria": "Servicios",
+   "valoracion": 5.0,
+   "resenas": 28,
+   "web": "https://hogargo.es/",
+   "localidad": "Murcia"
+  },
+  {
+   "posicion": 8,
+   "nombre": "Domus Nova",
+   "categoria": "Servicios",
+   "valoracion": 4.5,
+   "resenas": 31,
+   "web": "https://domusnovamurcia.es/",
+   "localidad": "Murcia"
+  },
+  {
+   "posicion": 9,
+   "nombre": "Obdecor Reformas y Construcciones",
+   "categoria": "Servicios",
+   "valoracion": 4.3,
+   "resenas": 16,
+   "web": "http://www.obdecor.es/",
+   "localidad": "Murcia"
+  },
+  {
+   "posicion": 10,
+   "nombre": "Aedes 5.0",
+   "categoria": "Servicios",
+   "valoracion": 4.9,
+   "resenas": 47,
+   "web": "https://aedes5punto0.com/",
+   "localidad": "Murcia"
+  },
+  {
+   "posicion": 11,
+   "nombre": "Juan Pedro Reformas e Interiorismo",
+   "categoria": "Servicios",
+   "valoracion": 4.1,
+   "resenas": 13,
+   "web": "http://reformasjp.es/",
+   "localidad": "Murcia"
+  },
+  {
+   "posicion": 12,
+   "nombre": "URBALIX Empresa reformas Murcia UERM",
+   "categoria": "Servicios",
+   "valoracion": 4.7,
+   "resenas": 19,
+   "web": "https://www.urbalix.com/",
+   "localidad": "Murcia"
+  },
+  {
+   "posicion": 13,
+   "nombre": "Basi servicios",
+   "categoria": "Servicios",
+   "valoracion": 5.0,
+   "resenas": 20,
+   "web": null,
+   "localidad": "Murcia"
+  },
+  {
+   "posicion": 14,
+   "nombre": "Natou Proyectos y Reformas",
+   "categoria": "Servicios",
+   "valoracion": 5.0,
+   "resenas": 11,
+   "web": "https://www.natou.es/",
+   "localidad": "Murcia"
+  },
+  {
+   "posicion": 15,
+   "nombre": "ROSTRINIUM | Reformas Integrales | Murcia | Alicante",
+   "categoria": "Servicios",
+   "valoracion": 3.8,
+   "resenas": 18,
+   "web": "http://rostrinium.com/",
+   "localidad": "Murcia"
+  },
+  {
+   "posicion": 16,
+   "nombre": "EnCasa Reformas",
+   "categoria": "Servicios",
+   "valoracion": 4.6,
+   "resenas": 7,
+   "web": "http://www.encasareformas.es/",
+   "localidad": "Murcia"
+  },
+  {
+   "posicion": 17,
+   "nombre": "make obras",
+   "categoria": "Servicios",
+   "valoracion": 5.0,
+   "resenas": 18,
+   "web": "https://www.makeobras.com/",
+   "localidad": "Murcia"
+  },
+  {
+   "posicion": 18,
+   "nombre": "Reformas Plumbing Tecnology",
+   "categoria": "Servicios",
+   "valoracion": 4.0,
+   "resenas": 18,
+   "web": "http://www.plumbingtecnology.es/",
+   "localidad": "Alcantarilla"
+  },
+  {
+   "posicion": 19,
+   "nombre": "Marino interiorismo",
+   "categoria": "Contratista general",
+   "valoracion": 4.6,
+   "resenas": 37,
+   "web": "https://www.marinointeriorismo.com/",
+   "localidad": "Murcia"
+  },
+  {
+   "posicion": 20,
+   "nombre": "Lucía Alemán Arquitectura Y Reformas",
+   "categoria": "Servicios",
+   "valoracion": 5.0,
+   "resenas": 10,
+   "web": "http://www.luciaaleman.es/",
+   "localidad": "Murcia"
+  }
+ ]
+}
