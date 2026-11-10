@@ -1,10 +1,12 @@
 // Integración propia: al terminar el build escribe lo que necesita Hostinger.
 //   dist/.htaccess      → HTTPS, dominio sin www, 301, caché, cabeceras de seguridad, 404
-//   dist/api/config.php → email de destino del formulario (sale de negocio.yaml)
+//   dist/api/config.php → email de destino del formulario (sale de negocio.yaml) y, solo en el
+//                         despliegue a Hostinger, el token y el chat de Telegram (secretos de GitHub)
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { leerNegocio } from '../src/lib/datos-base.mjs';
+import { telegramDelDespliegue } from '../src/lib/telegram.mjs';
 
 const escaparRegex = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const php = (s) => `'${String(s).replace(/\\/g, '\\\\').replace(/'/g, "\\'")}'`;
@@ -20,6 +22,11 @@ function htaccess(negocio, redirecciones) {
 Options -Indexes
 DirectoryIndex index.html
 ErrorDocument 404 /404.html
+
+# La configuración del formulario (email y avisos de Telegram) nunca se sirve por web
+<Files "config.php">
+Require all denied
+</Files>
 
 <IfModule mod_rewrite.c>
 RewriteEngine On
@@ -73,15 +80,18 @@ AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application
 `;
 }
 
-function configPhp(negocio) {
+function configPhp(negocio, telegram) {
   return `<?php
 // Generado por integrations/hostinger.mjs desde src/data/negocio.yaml. No lo edites a mano.
+// Telegram: sale de los secretos de GitHub en el despliegue; vacío en cualquier otro build.
 return [
   'para' => ${php(negocio.email)},
   'marca' => ${php(negocio.marca)},
   'dominio' => ${php(new URL(negocio.dominio).host.replace(/^www\./, ''))},
   'gracias' => '/contacto/gracias/',
   'error' => '/contacto/',
+  'telegram_token' => ${php(telegram?.token ?? '')},
+  'telegram_chat' => ${php(telegram?.chat ?? '')},
 ];
 `;
 }
@@ -94,10 +104,11 @@ export default function hostinger({ redirecciones = [] } = {}) {
       'astro:build:done': ({ dir, logger }) => {
         const salida = fileURLToPath(dir);
         const negocio = leerNegocio();
+        const telegram = telegramDelDespliegue();
         writeFileSync(join(salida, '.htaccess'), htaccess(negocio, redirecciones));
         mkdirSync(join(salida, 'api'), { recursive: true });
-        writeFileSync(join(salida, 'api', 'config.php'), configPhp(negocio));
-        logger.info('.htaccess y api/config.php listos para Hostinger');
+        writeFileSync(join(salida, 'api', 'config.php'), configPhp(negocio, telegram));
+        logger.info(`.htaccess y api/config.php listos para Hostinger (avisos por Telegram: ${telegram ? 'sí' : 'no'})`);
       },
     },
   };

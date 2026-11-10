@@ -26,6 +26,16 @@
 8. Hosting: Hostinger + secretos FTP en GitHub + variable `DEPLOY_ENABLED=true`.
 9. Ficha de Google Business Profile con el mismo nombre, teléfono y web.
 
+## Telegram (opcional, ya programado)
+
+Cada presupuesto del formulario te llega también por Telegram, y te avisa al publicar y en la revisión semanal.
+Para activarlo:
+
+1. En @BotFather, `/revoke` para sacar un token nuevo (el anterior se escribió en el chat).
+2. Abre tu bot en Telegram y pulsa Iniciar (/start).
+3. GitHub → Settings → Secrets and variables → Actions: secretos `TELEGRAM_BOT_TOKEN` (el nuevo) y `TELEGRAM_CHAT_ID`.
+4. Workflow «Probar Telegram» (o pídeselo a Claude): te llega un mensaje de prueba.
+
 ## Siguientes fases (url-map → proximas_fases)
 
 - Fase 2: cambio de bañera y fachadas en los 3 pueblos; pueblos nuevos: Las Torres de Cotillas, Alguazas,

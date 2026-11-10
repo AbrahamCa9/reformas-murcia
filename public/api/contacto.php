@@ -1,6 +1,7 @@
 <?php
-// Formulario de presupuesto (Hostinger): valida, filtra spam y envía un email.
-// La configuración (email de destino, marca, dominio) la genera el build en api/config.php.
+// Formulario de presupuesto (Hostinger): valida, filtra spam, envía un email y, si está configurado,
+// un aviso por Telegram. La configuración (email de destino, marca, dominio y Telegram) la genera
+// el build en api/config.php; el token de Telegram llega desde los secretos de GitHub, nunca del repo.
 declare(strict_types=1);
 date_default_timezone_set('Europe/Madrid');
 
@@ -10,6 +11,44 @@ function volver(string $ruta): void
 {
     header('Location: ' . $ruta, true, 303);
     exit;
+}
+
+/** Manda el aviso al Telegram del negocio. Devuelve false si no está configurado o Telegram no lo acepta. */
+function avisarTelegram(array $config, string $texto): bool
+{
+    $token = (string) ($config['telegram_token'] ?? '');
+    $chat = (string) ($config['telegram_chat'] ?? '');
+    if ($token === '' || $chat === '') {
+        return false;
+    }
+    $url = 'https://api.telegram.org/bot' . $token . '/sendMessage';
+    $datos = http_build_query([
+        'chat_id' => $chat,
+        'text' => mb_substr($texto, 0, 4000),
+        'link_preview_options' => '{"is_disabled":true}',
+    ]);
+    if (function_exists('curl_init')) {
+        $ch = curl_init($url);
+        curl_setopt_array($ch, [
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => $datos,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_CONNECTTIMEOUT => 3,
+            CURLOPT_TIMEOUT => 6,
+        ]);
+        $respuesta = curl_exec($ch);
+        unset($ch);
+    } else {
+        $respuesta = @file_get_contents($url, false, stream_context_create(['http' => [
+            'method' => 'POST',
+            'header' => "Content-Type: application/x-www-form-urlencoded\r\n",
+            'content' => $datos,
+            'timeout' => 6,
+            'ignore_errors' => true,
+        ]]));
+    }
+    $json = is_string($respuesta) ? json_decode($respuesta, true) : null;
+    return is_array($json) && ($json['ok'] ?? false) === true;
 }
 
 if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
@@ -62,8 +101,8 @@ if (!$valido) {
 }
 
 // 5) Envío
-$asunto = ($sinJs ? '[Revisar] ' : '') . 'Presupuesto: ' . ($servicio !== '' ? $servicio : 'reforma')
-    . ($localidad !== '' ? ' en ' . $localidad : '');
+$tema = 'Presupuesto: ' . ($servicio !== '' ? $servicio : 'reforma') . ($localidad !== '' ? ' en ' . $localidad : '');
+$asunto = ($sinJs ? '[Revisar] ' : '') . $tema;
 $cuerpo = implode("\n", [
     'Nueva solicitud de presupuesto desde la web',
     '',
@@ -91,7 +130,20 @@ if ($email !== '') {
     $cabeceras[] = 'Reply-To: ' . $email;
 }
 
-if (!mail($config['para'], mb_encode_mimeheader($asunto, 'UTF-8'), $cuerpo, implode("\r\n", $cabeceras))) {
+// Telegram: aviso corto para poder llamar al momento. Si el email falla pero Telegram llega, no se pierde.
+$avisoTelegram = avisarTelegram($config, implode("\n", [
+    ($sinJs ? '⚠️ Revisar, puede ser spam · ' : '🔔 ') . $tema,
+    '',
+    'Nombre: ' . $nombre,
+    'Teléfono: ' . $telefono,
+    'Email: ' . ($email !== '' ? $email : '(no indicado)'),
+    '',
+    $mensaje !== '' ? $mensaje : '(sin mensaje)',
+    '',
+    'Página: ' . $origen,
+]));
+$emailEnviado = mail($config['para'], mb_encode_mimeheader($asunto, 'UTF-8'), $cuerpo, implode("\r\n", $cabeceras));
+if (!$emailEnviado && !$avisoTelegram) {
     volver($config['error'] . '?error=envio#presupuesto');
 }
 

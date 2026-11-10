@@ -1,5 +1,6 @@
 # Revisión semanal: compila, pasa el QA y abre una issue si hay algo que atender.
 # La issue es el punto de partida para pedirle a Claude: "revisa la issue de mantenimiento".
+# Si están los secretos de Telegram, también te avisa por Telegram con el enlace a la issue.
 name: Mantenimiento semanal
 on:
   schedule:
@@ -28,6 +29,8 @@ jobs:
         if: steps.qa.outputs.fallo == 'si'
         env:
           GH_TOKEN: ${{ github.token }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
           informe=$(ls -d qa/*/ | tail -1)REPORT.md
           {
@@ -40,4 +43,5 @@ jobs:
             cat dependencias.txt
             echo '```'
           } > cuerpo.md
-          gh issue create --title "Mantenimiento semanal $(date +%d/%m/%Y)" --body-file cuerpo.md
+          issue=$(gh issue create --title "Mantenimiento semanal $(date +%d/%m/%Y)" --body-file cuerpo.md)
+          node scripts/avisar-telegram.mjs "🛠️ Revisión semanal de la web: hay cosas que atender. Pídele a Claude «revisa la issue de mantenimiento». $issue"

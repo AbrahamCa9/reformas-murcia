@@ -2,7 +2,10 @@
 import Legal from '../layouts/Legal.astro';
 import { negocio, contacto } from '../lib/datos';
 import { rutas } from '../lib/contenido';
+import { telegramDelDespliegue } from '../lib/telegram.mjs';
 const { legal } = negocio;
+// Solo se menciona Telegram si la web publicada manda los avisos por Telegram (secretos de GitHub).
+const avisosTelegram = telegramDelDespliegue() !== null;
 ---
 
 <Legal
@@ -33,6 +36,7 @@ const { legal } = negocio;
     No cedemos tus datos a terceros salvo obligación legal. El proveedor de alojamiento de la web y del correo trata los
     datos por cuenta nuestra, con contrato de encargado del tratamiento. Si nos escribes por WhatsApp, se aplica además la
     política de privacidad de WhatsApp.
+    {avisosTelegram && 'Para responderte antes, cada solicitud del formulario nos llega también como aviso por Telegram.'}
   </p>
   <h2>Tus derechos</h2>
   <p>

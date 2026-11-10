@@ -2,6 +2,8 @@
 # No hace nada hasta que exista la variable DEPLOY_ENABLED = true
 # (GitHub → Settings → Secrets and variables → Actions → Variables).
 # Secretos necesarios: FTP_SERVER, FTP_USERNAME, FTP_PASSWORD.
+# Opcionales: TELEGRAM_BOT_TOKEN y TELEGRAM_CHAT_ID (presupuestos y avisos por Telegram).
+# Solo este build recibe el token: lo escribe en api/config.php, que Hostinger no sirve por web.
 name: Publicar en Hostinger
 on:
   push:
@@ -27,6 +29,9 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npm run build
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       # Estricto: no publica si quedan borradores, datos legales o pendientes en negocio.yaml
       - run: npm run qa -- --estricto
       - uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -36,3 +41,16 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/
           server-dir: ./public_html/
+      - name: Avisar por Telegram
+        if: always()
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          ESTADO: ${{ job.status }}
+          REGISTRO: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          if [ "$ESTADO" = "success" ]; then
+            node scripts/avisar-telegram.mjs "✅ Web publicada en Hostinger."
+          else
+            node scripts/avisar-telegram.mjs "❌ No se ha podido publicar la web. Qué ha fallado: $REGISTRO"
+          fi
