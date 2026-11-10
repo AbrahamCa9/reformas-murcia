@@ -1,0 +1,75 @@
+---
+// FAQ desplegable sin JavaScript. Las mismas preguntas van al schema FAQPage de la página.
+import Seccion from './Seccion.astro';
+import type { Pregunta } from '../lib/schema';
+
+interface Props {
+  titulo?: string;
+  intro?: string;
+  preguntas: Pregunta[];
+  alt?: boolean;
+}
+const { titulo = 'Preguntas frecuentes', intro, preguntas, alt } = Astro.props;
+---
+
+<Seccion id="faq" titulo={titulo} intro={intro} alt={alt}>
+  <div class="faq">
+    {
+      preguntas.map((p) => (
+        <details class="faq-item">
+          <summary>
+            <h3>{p.pregunta}</h3>
+          </summary>
+          <p>{p.respuesta}</p>
+        </details>
+      ))
+    }
+  </div>
+</Seccion>
+
+<style>
+  .faq {
+    max-width: 50rem;
+    border-top: 1px solid var(--borde);
+  }
+  .faq-item {
+    border-bottom: 1px solid var(--borde);
+  }
+  summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 0;
+    list-style: none;
+    cursor: pointer;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  summary::after {
+    content: '+';
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--acento-suave);
+    color: var(--acento-osc);
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .faq-item[open] summary::after {
+    content: '−';
+  }
+  summary h3 {
+    margin: 0;
+    font-size: 1.08rem;
+  }
+  .faq-item p {
+    margin: 0 0 1.1rem;
+    color: var(--suave);
+  }
+</style>

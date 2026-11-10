@@ -1,0 +1,84 @@
+---
+// Tarjetas de servicio: toda la tarjeta es clicable y enlaza con texto descriptivo.
+import Icono from './Icono.astro';
+import type { ItemServicio } from '../lib/tipos';
+interface Props {
+  items: ItemServicio[];
+}
+const { items } = Astro.props;
+---
+
+<ul class="rejilla servicios">
+  {
+    items.map((s) => (
+      <li class="tarjeta servicio">
+        <span class="servicio-icono">
+          <Icono nombre={s.icono} />
+        </span>
+        <h3>
+          <a href={s.href}>{s.nombre}</a>
+        </h3>
+        {s.resumen && <p>{s.resumen}</p>}
+        <span class="servicio-mas" aria-hidden="true">
+          {s.etiqueta ?? 'Ver servicio'} <Icono nombre="flecha" tam={18} />
+        </span>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .servicios {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .servicio {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    transition: border-color 0.15s;
+  }
+  .servicio:hover {
+    border-color: var(--acento);
+  }
+  .servicio h3 {
+    margin: 0;
+    font-size: 1.12rem;
+  }
+  .servicio h3 a {
+    color: var(--texto);
+    text-decoration: none;
+  }
+  .servicio h3 a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+  }
+  .servicio p {
+    margin: 0;
+    color: var(--suave);
+    font-size: 0.98rem;
+  }
+  .servicio-icono {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 12px;
+    background: var(--acento-suave);
+    color: var(--acento);
+  }
+  .servicio-mas {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: auto;
+    padding-top: 0.25rem;
+    color: var(--acento-osc);
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+</style>

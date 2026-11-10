@@ -1,0 +1,84 @@
+---
+// Cabecera de página: H1, entradilla, puntos de confianza y los 3 botones de contacto.
+import Icono from './Icono.astro';
+import Migas from './Migas.astro';
+import { contacto } from '../lib/datos';
+import type { Miga } from '../lib/schema';
+
+interface Props {
+  h1: string;
+  texto: string;
+  migas?: Miga[];
+  puntos?: string[];
+  mensajeWa: string;
+  anclaPresupuesto?: string;
+}
+const { h1, texto, migas, puntos = [], mensajeWa, anclaPresupuesto = '#presupuesto' } = Astro.props;
+const wa = contacto.whatsappHref ? `${contacto.whatsappHref}?text=${encodeURIComponent(mensajeWa)}` : null;
+---
+
+<section class="hero" aria-labelledby="titulo-pagina">
+  <div class="contenedor">
+    {migas && <Migas items={migas} />}
+    <h1 id="titulo-pagina">{h1}</h1>
+    <p class="hero-texto">{texto}</p>
+    {
+      puntos.length > 0 && (
+        <ul class="hero-puntos">
+          {puntos.map((p) => (
+            <li>
+              <Icono nombre="check" tam={20} />
+              {p}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+    <div class="botones">
+      <a class="btn btn-acento" href={anclaPresupuesto}>Pide presupuesto gratis <Icono nombre="flecha" tam={20} /></a>
+      {
+        wa && (
+          <a class="btn btn-wa" href={wa} target="_blank" rel="noopener">
+            <Icono nombre="whatsapp" tam={20} />
+            WhatsApp
+          </a>
+        )
+      }
+      <a class="btn btn-borde" href={contacto.telefonoHref}><Icono nombre="telefono" tam={20} />{contacto.telefonoVisible}</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: clamp(2.25rem, 6vw, 4.25rem);
+    background-color: var(--marca);
+    background-image: radial-gradient(120% 140% at 100% 0%, var(--hero-brillo) 0%, var(--marca) 60%);
+    color: #fff;
+  }
+  .hero h1 {
+    max-width: 26ch;
+  }
+  .hero-texto {
+    max-width: 42rem;
+    color: #e5e7eb;
+    font-size: clamp(1.1rem, 2.4vw, 1.3rem);
+  }
+  .hero-puntos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    margin: 0 0 1.6rem;
+    padding: 0;
+    list-style: none;
+  }
+  .hero-puntos li {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 600;
+  }
+  .hero-puntos :global(svg) {
+    color: #fdba74;
+  }
+</style>

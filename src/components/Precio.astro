@@ -1,0 +1,67 @@
+---
+// Precio: factores que lo mueven. Cifras solo si el negocio las define (precio_orientativo).
+import Seccion from './Seccion.astro';
+import Icono from './Icono.astro';
+
+interface Props {
+  titulo: string;
+  intro?: string;
+  factores: string[];
+  precio?: string;
+  alt?: boolean;
+  anclaPresupuesto?: string;
+}
+const {
+  titulo,
+  intro = 'Cada obra es distinta, así que no damos precios a ciegas. Estos son los puntos que más cambian el presupuesto:',
+  factores,
+  precio,
+  alt,
+  anclaPresupuesto = '#presupuesto',
+} = Astro.props;
+---
+
+<Seccion id="precio" titulo={titulo} intro={intro} alt={alt}>
+  <div class="precio">
+    <ul class="checks">
+      {
+        factores.map((f) => (
+          <li>
+            <Icono nombre="check" tam={20} />
+            <span>{f}</span>
+          </li>
+        ))
+      }
+    </ul>
+    <div class="tarjeta precio-nota">
+      {precio && <p class="precio-cifra">{precio}</p>}
+      <p>
+        Vamos a ver la obra, medimos y te damos un presupuesto por partidas. Es gratis, sin compromiso y te lo dejamos por
+        escrito para que lo compares con calma.
+      </p>
+      <a class="btn btn-acento" href={anclaPresupuesto}>Pedir presupuesto gratis</a>
+    </div>
+  </div>
+</Seccion>
+
+<style>
+  .precio {
+    display: grid;
+    gap: 1.5rem;
+    align-items: start;
+  }
+  .precio-cifra {
+    color: var(--acento-osc);
+    font-size: 1.35rem;
+    font-weight: 800;
+  }
+  .precio-nota p {
+    color: var(--suave);
+  }
+  @media (min-width: 56rem) {
+    .precio {
+      grid-template-columns: 1.4fr 1fr;
+      gap: 2.5rem;
+    }
+  }
+</style>

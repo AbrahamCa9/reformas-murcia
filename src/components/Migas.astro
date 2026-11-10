@@ -1,0 +1,42 @@
+---
+// Migas de pan visibles (el BreadcrumbList del schema se genera aparte con los mismos datos).
+import type { Miga } from '../lib/schema';
+
+interface Props {
+  items: Miga[];
+}
+const { items } = Astro.props;
+---
+
+<nav class="migas" aria-label="Estás en">
+  <ol>
+    {
+      items.map((m, i) => (
+        <li>{i < items.length - 1 ? <a href={m.ruta}>{m.nombre}</a> : <span aria-current="page">{m.nombre}</span>}</li>
+      ))
+    }
+  </ol>
+</nav>
+
+<style>
+  .migas ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin: 0 0 1.1rem;
+    padding: 0;
+    list-style: none;
+    font-size: 0.92rem;
+  }
+  .migas li + li::before {
+    content: '›';
+    margin-right: 0.3rem;
+    opacity: 0.7;
+  }
+  .migas a {
+    color: inherit;
+  }
+  .migas [aria-current] {
+    opacity: 0.85;
+  }
+</style>

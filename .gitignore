@@ -1,0 +1,16 @@
+# Dependencias y builds
+node_modules/
+dist/
+.astro/
+.vercel/
+
+# Informes de QA (se generan con `npm run qa`; en GitHub se guardan como artefacto)
+/qa/
+
+# Secretos
+.env
+.env.*
+
+# Sistema
+.DS_Store
+Thumbs.db

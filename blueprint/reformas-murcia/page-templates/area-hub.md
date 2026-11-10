@@ -2,7 +2,7 @@
 tipo: area-hub
 url: /zonas/{zona_slug}/
 title: "Empresa de reformas en {zona} | {marca}"
-meta_description: "Reformas en {zona}: integrales, baños, cocinas, fachadas e instalaciones. {gancho} Presupuesto gratis: {telefono}."
+meta_description: "Reformas en {zona}: integrales, baños, cocinas y más. {gancho} Presupuesto gratis: {telefono}."
 h1: "Empresa de reformas en {zona}"
 secciones: [hero, contenido-local, servicios-zona, por-que-nosotros, proceso, faq, zonas-cercanas, cta-final]
 schema: [BreadcrumbList, FAQPage, ItemList]

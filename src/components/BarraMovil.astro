@@ -1,0 +1,67 @@
+---
+// Barra fija en móvil: llamar, WhatsApp y presupuesto siempre a un toque.
+import Icono from './Icono.astro';
+import { contacto } from '../lib/datos';
+
+interface Props {
+  mensajeWa: string;
+  anclaPresupuesto: string;
+}
+const { mensajeWa, anclaPresupuesto } = Astro.props;
+const wa = contacto.whatsappHref ? `${contacto.whatsappHref}?text=${encodeURIComponent(mensajeWa)}` : null;
+---
+
+<nav class="barra-movil" aria-label="Contacto rápido">
+  <a href={contacto.telefonoHref}><Icono nombre="telefono" tam={20} />Llamar</a>
+  {
+    wa && (
+      <a class="wa" href={wa} target="_blank" rel="noopener">
+        <Icono nombre="whatsapp" tam={20} />
+        WhatsApp
+      </a>
+    )
+  }
+  <a class="pres" href={anclaPresupuesto}><Icono nombre="documento" tam={20} />Presupuesto</a>
+</nav>
+
+<style>
+  .barra-movil {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 30;
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-auto-flow: column;
+    padding-bottom: env(safe-area-inset-bottom);
+    background: var(--fondo);
+    border-top: 1px solid var(--borde);
+    box-shadow: 0 -4px 16px rgb(0 0 0 / 0.08);
+  }
+  .barra-movil a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.15rem;
+    min-height: 3.75rem;
+    color: var(--texto);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .barra-movil .wa {
+    background: var(--wa);
+    color: #fff;
+  }
+  .barra-movil .pres {
+    background: var(--acento);
+    color: #fff;
+  }
+  @media (min-width: 48rem) {
+    .barra-movil {
+      display: none;
+    }
+  }
+</style>

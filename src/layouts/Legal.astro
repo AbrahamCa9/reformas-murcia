@@ -1,0 +1,21 @@
+---
+// Páginas legales: texto plano con los datos de negocio.yaml. Revísalas con un abogado o gestor.
+import Base from './Base.astro';
+import { negocio } from '../lib/datos';
+
+interface Props {
+  titulo: string;
+  descripcion: string;
+  ruta: string;
+}
+const { titulo, descripcion, ruta } = Astro.props;
+---
+
+<Base title={`${titulo} | ${negocio.marca}`} description={descripcion} ruta={ruta} conFormulario={false} tipo="legal">
+  <section class="seccion">
+    <div class="contenedor prosa">
+      <h1>{titulo}</h1>
+      <slot />
+    </div>
+  </section>
+</Base>

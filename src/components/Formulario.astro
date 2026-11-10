@@ -1,0 +1,226 @@
+---
+// Formulario de presupuesto → public/api/contacto.php (Hostinger).
+// Antispam sin servicios externos: campo trampa + tiempo mínimo de relleno.
+// El botón de WhatsApp compone el mensaje con lo que la persona haya escrito.
+import Icono from './Icono.astro';
+import { negocio, contacto, municipios, INDEXAR } from '../lib/datos';
+import { servicios, rutas } from '../lib/contenido';
+
+interface Props {
+  servicio?: string;
+  zona?: string;
+  mensajeWa: string;
+}
+const { servicio, zona, mensajeWa } = Astro.props;
+const lista = await servicios();
+const waBase = contacto.whatsappHref;
+const responsable = negocio.legal.titular.startsWith('[') ? negocio.marca : negocio.legal.titular;
+---
+
+<form class="formulario tarjeta" method="post" action="/api/contacto.php" data-formulario>
+  <h3>Cuéntanos tu obra</h3>
+  <p class="ayuda">Te llamamos para concretar la visita. Los campos con * son obligatorios.</p>
+
+  <div class="campos">
+    <div class="campo">
+      <label for="f-nombre">Nombre *</label>
+      <input id="f-nombre" name="nombre" autocomplete="name" required minlength="2" maxlength="80" />
+    </div>
+    <div class="campo">
+      <label for="f-telefono">Teléfono *</label>
+      <input
+        id="f-telefono"
+        name="telefono"
+        type="tel"
+        autocomplete="tel"
+        inputmode="tel"
+        required
+        pattern="[0-9 +().\-]{9,25}"
+        maxlength="25"
+      />
+    </div>
+    <div class="campo">
+      <label for="f-email">Email <span>(opcional)</span></label>
+      <input id="f-email" name="email" type="email" autocomplete="email" maxlength="120" />
+    </div>
+    <div class="campo">
+      <label for="f-localidad">Localidad</label>
+      <input id="f-localidad" name="localidad" list="f-municipios" maxlength="80" value={zona ?? ''} />
+      <datalist id="f-municipios">
+        {municipios.map((m) => <option value={m.nombre} />)}
+      </datalist>
+    </div>
+    <div class="campo campo-ancho">
+      <label for="f-servicio">¿Qué quieres reformar?</label>
+      <select id="f-servicio" name="servicio">
+        <option value="">Elige una opción</option>
+        {
+          lista.map((s) => (
+            <option value={s.data.nombre} selected={s.data.nombre === servicio}>
+              {s.data.nombre}
+            </option>
+          ))
+        }
+        <option value="Otro">Otro trabajo</option>
+      </select>
+    </div>
+    <div class="campo campo-ancho">
+      <label for="f-mensaje">Cuéntanos qué necesitas</label>
+      <textarea
+        id="f-mensaje"
+        name="mensaje"
+        rows="4"
+        maxlength="3000"
+        placeholder="Ej.: baño de unos 5 m², cambiar la bañera por un plato de ducha y alicatar de nuevo."></textarea>
+    </div>
+  </div>
+
+  <div class="trampa" aria-hidden="true">
+    <label for="f-web">No rellenes este campo</label>
+    <input id="f-web" name="web" tabindex="-1" autocomplete="off" />
+  </div>
+  <input type="hidden" name="t" value="" />
+  <input type="hidden" name="origen" value={Astro.url.pathname} />
+
+  <label class="acepto">
+    <input type="checkbox" name="privacidad" value="1" required />
+    <span>He leído y acepto la <a href={rutas.privacidad}>política de privacidad</a>. *</span>
+  </label>
+  <p class="rgpd">
+    Responsable: {responsable}. Finalidad: responder a tu solicitud de presupuesto. No cedemos tus datos a terceros.
+    Puedes ejercer tus derechos escribiendo a {contacto.email}.
+  </p>
+
+  <div class="botones">
+    <button class="btn btn-acento" type="submit">Enviar solicitud</button>
+    {
+      waBase && (
+        <a
+          class="btn btn-wa"
+          href={`${waBase}?text=${encodeURIComponent(mensajeWa)}`}
+          data-wa={waBase}
+          target="_blank"
+          rel="noopener"
+        >
+          <Icono nombre="whatsapp" tam={20} />
+          Enviar por WhatsApp
+        </a>
+      )
+    }
+  </div>
+  {
+    !INDEXAR && (
+      <p class="aviso-pruebas">
+        Versión de pruebas: el formulario solo envía correos en el hosting final. Para probar, usa WhatsApp o el teléfono.
+      </p>
+    )
+  }
+</form>
+
+<script is:inline>
+  (() => {
+    const f = document.querySelector('[data-formulario]');
+    if (!f) return;
+    f.elements.namedItem('t').value = String(Date.now());
+    const wa = f.querySelector('[data-wa]');
+    if (!wa) return;
+    wa.addEventListener('click', () => {
+      const v = (n) => (f.elements.namedItem(n)?.value || '').trim();
+      const partes = ['Hola, quiero pedir presupuesto.'];
+      if (v('servicio')) partes.push('Trabajo: ' + v('servicio'));
+      if (v('localidad')) partes.push('Localidad: ' + v('localidad'));
+      if (v('mensaje')) partes.push(v('mensaje'));
+      if (v('nombre')) partes.push('Soy ' + v('nombre') + '.');
+      if (partes.length > 1) wa.href = wa.dataset.wa + '?text=' + encodeURIComponent(partes.join('\n'));
+    });
+  })();
+</script>
+
+<style>
+  .formulario h3 {
+    margin-bottom: 0.25rem;
+    font-size: 1.3rem;
+  }
+  .ayuda {
+    color: var(--suave);
+    font-size: 0.95rem;
+  }
+  .campos {
+    display: grid;
+    gap: 0.9rem;
+  }
+  .campo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .campo label {
+    font-weight: 700;
+  }
+  .campo label span {
+    color: var(--suave);
+    font-weight: 400;
+  }
+  input,
+  select,
+  textarea {
+    width: 100%;
+    min-height: 48px;
+    padding: 0.65rem 0.8rem;
+    border: 1px solid #c9c2b8;
+    border-radius: 8px;
+    background: #fff;
+    color: var(--texto);
+    font: inherit;
+  }
+  textarea {
+    resize: vertical;
+  }
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    border-color: var(--acento);
+  }
+  .trampa {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .acepto {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    margin: 1.1rem 0 0.4rem;
+  }
+  .acepto input {
+    flex: none;
+    width: 1.3rem;
+    min-height: 1.3rem;
+    height: 1.3rem;
+    margin-top: 0.2rem;
+    accent-color: var(--acento);
+  }
+  .rgpd {
+    color: var(--suave);
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+  .aviso-pruebas {
+    margin: 1rem 0 0;
+    padding: 0.6rem 0.8rem;
+    border-radius: 8px;
+    background: #fef3c7;
+    color: #78350f;
+    font-size: 0.88rem;
+  }
+  @media (min-width: 36rem) {
+    .campos {
+      grid-template-columns: 1fr 1fr;
+    }
+    .campo-ancho {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

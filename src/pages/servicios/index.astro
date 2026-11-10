@@ -1,0 +1,42 @@
+---
+// Listado de servicios (/servicios/)
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/Hero.astro';
+import Seccion from '../../components/Seccion.astro';
+import RejillaServicios from '../../components/RejillaServicios.astro';
+import CtaFinal from '../../components/CtaFinal.astro';
+import { negocio, contacto } from '../../lib/datos';
+import { servicios, rutas } from '../../lib/contenido';
+import { grafo, migas as migasSchema, listaServicios } from '../../lib/schema';
+
+const lista = await servicios();
+const items = lista.map((s) => ({ nombre: s.data.nombre, resumen: s.data.resumen, icono: s.data.icono, href: rutas.servicio(s.id) }));
+const migas = [
+  { nombre: 'Inicio', ruta: rutas.home },
+  { nombre: 'Servicios', ruta: rutas.servicios },
+];
+const schema = grafo([
+  migasSchema(migas),
+  listaServicios(`Servicios de reformas en ${negocio.ciudad}`, items.map((i) => ({ nombre: i.nombre, ruta: i.href }))),
+]);
+const mensajeWa = 'Hola, quiero pedir presupuesto para una reforma.';
+---
+
+<Base
+  title={`Servicios de reformas en ${negocio.ciudad} | ${negocio.marca}`}
+  description={`Todos nuestros servicios de reformas en ${negocio.ciudad}: integrales, baños, cocinas, fachadas, instalaciones y más. Presupuesto gratis: ${contacto.telefonoVisible}.`}
+  ruta={rutas.servicios}
+  schema={schema}
+  mensajeWa={mensajeWa}
+>
+  <Hero
+    h1={`Servicios de reformas en ${negocio.ciudad}`}
+    texto={`Todo lo que necesitas para reformar tu casa, tu local o tu comunidad en ${negocio.ciudad} y en los pueblos de la región. Elige un servicio para ver qué incluye y cómo trabajamos.`}
+    migas={migas}
+    mensajeWa={mensajeWa}
+  />
+  <Seccion id="servicios" titulo="Elige tu reforma" alt>
+    <RejillaServicios items={items} />
+  </Seccion>
+  <CtaFinal mensajeWa={mensajeWa} />
+</Base>

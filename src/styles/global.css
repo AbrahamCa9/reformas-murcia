@@ -1,0 +1,277 @@
+/* ───────────────────────────────────────────────────────────────────────────
+   Estilos globales. Sin fuentes externas ni frameworks: CSS mínimo para que
+   la web cargue en < 2,5 s en móvil (presupuesto heredado de la competencia).
+   Los colores de marca llegan desde src/data/negocio.yaml: Base.astro los
+   sobrescribe (--marca, --acento y sus tonos calculados).
+   ─────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  --marca: #1f2937;
+  --acento: #c2410c;
+  --acento-osc: #9b340a;
+  --acento-suave: #f9ece6;
+  --hero-brillo: #4f2c25;
+  --wa: #15803d;
+  --wa-osc: #166534;
+  --texto: #1f2937;
+  --suave: #4b5563;
+  --fondo: #ffffff;
+  --fondo-alt: #f7f5f2;
+  --borde: #e6e1d9;
+  --radio: 12px;
+  --sombra: 0 1px 2px rgb(0 0 0 / 0.06), 0 4px 16px rgb(0 0 0 / 0.06);
+  --ancho: 72rem;
+  --fuente: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 1rem;
+}
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: var(--fuente);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--acento-osc);
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  color: var(--acento);
+}
+
+:focus-visible {
+  outline: 3px solid var(--acento);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.6em;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2rem, 5.5vw, 3.1rem);
+  font-weight: 800;
+}
+
+h2 {
+  font-size: clamp(1.55rem, 3.6vw, 2.1rem);
+  font-weight: 800;
+}
+
+h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+.contenedor {
+  width: 100%;
+  max-width: var(--ancho);
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+.saltar {
+  position: absolute;
+  left: -999px;
+  top: 0.5rem;
+  background: var(--fondo);
+  padding: 0.5rem 1rem;
+  z-index: 100;
+}
+
+.saltar:focus {
+  left: 0.5rem;
+}
+
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Botones */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0.75rem 1.25rem;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  font: inherit;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    color 0.15s,
+    border-color 0.15s;
+}
+
+.btn-acento {
+  background: var(--acento);
+  color: #fff;
+}
+
+.btn-acento:hover {
+  background: var(--acento-osc);
+  color: #fff;
+}
+
+.btn-wa {
+  background: var(--wa);
+  color: #fff;
+}
+
+.btn-wa:hover {
+  background: var(--wa-osc);
+  color: #fff;
+}
+
+.btn-borde {
+  background: transparent;
+  color: inherit;
+  border-color: currentColor;
+}
+
+.btn-borde:hover {
+  background: rgb(255 255 255 / 0.12);
+  color: inherit;
+}
+
+.botones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* Secciones */
+.seccion {
+  padding-block: clamp(2.75rem, 7vw, 4.5rem);
+}
+
+.seccion-alt {
+  background: var(--fondo-alt);
+}
+
+.seccion-cabecera {
+  max-width: 46rem;
+  margin-bottom: 2rem;
+}
+
+.seccion-cabecera p {
+  color: var(--suave);
+  font-size: 1.1rem;
+}
+
+.rejilla {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16.5rem), 1fr));
+}
+
+.tarjeta {
+  background: var(--fondo);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  padding: 1.25rem;
+  box-shadow: var(--sombra);
+}
+
+/* Texto largo (Markdown) */
+.prosa {
+  max-width: 46rem;
+}
+
+.prosa h2 {
+  margin-top: 1.6em;
+}
+
+.prosa h3 {
+  margin-top: 1.4em;
+}
+
+.prosa ul,
+.prosa ol {
+  padding-left: 1.25rem;
+  margin: 0 0 1em;
+}
+
+.prosa li {
+  margin-bottom: 0.35em;
+}
+
+.prosa strong {
+  color: var(--texto);
+}
+
+/* Lista con checks */
+.checks {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.checks li {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+.checks svg {
+  flex: none;
+  margin-top: 0.2em;
+  color: var(--acento);
+}
+
+/* Margen inferior para que la barra fija del móvil no tape el pie */
+@media (max-width: 47.99rem) {
+  body {
+    padding-bottom: 4.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

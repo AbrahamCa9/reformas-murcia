@@ -1,0 +1,43 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { negocio, contacto } from '../lib/datos';
+import { rutas } from '../lib/contenido';
+const { legal } = negocio;
+---
+
+<Legal
+  titulo="Política de privacidad"
+  descripcion={`Cómo trata ${negocio.marca} los datos personales que nos envías al pedir presupuesto.`}
+  ruta={rutas.privacidad}
+>
+  <h2>Responsable del tratamiento</h2>
+  <p>{legal.titular} (NIF {legal.nif}), {legal.domicilio}. Email: {contacto.email}. Teléfono: {contacto.telefonoVisible}.</p>
+  <h2>Qué datos tratamos y para qué</h2>
+  <p>
+    Los que nos das en el formulario, por teléfono, por WhatsApp o por email: nombre, teléfono, email, localidad y la
+    descripción de tu obra. Los usamos solo para contestar tu solicitud, preparar el presupuesto y, si lo aceptas, hacer la
+    obra.
+  </p>
+  <h2>Base legal</h2>
+  <p>
+    Tu consentimiento al enviar la solicitud y la aplicación de medidas precontractuales a petición tuya (artículo 6.1.a y
+    6.1.b del Reglamento General de Protección de Datos).
+  </p>
+  <h2>Cuánto tiempo los guardamos</h2>
+  <p>
+    Mientras tramitamos tu solicitud. Si no hay obra, los borramos en un plazo máximo de un año. Si hay obra, durante los
+    plazos que exija la ley (fiscales y de garantía).
+  </p>
+  <h2>Quién más puede verlos</h2>
+  <p>
+    No cedemos tus datos a terceros salvo obligación legal. El proveedor de alojamiento de la web y del correo trata los
+    datos por cuenta nuestra, con contrato de encargado del tratamiento. Si nos escribes por WhatsApp, se aplica además la
+    política de privacidad de WhatsApp.
+  </p>
+  <h2>Tus derechos</h2>
+  <p>
+    Puedes pedir acceso, rectificación, supresión, oposición, limitación y portabilidad escribiendo a {contacto.email}. Si
+    crees que no hemos atendido bien tu petición, puedes reclamar ante la Agencia Española de Protección de Datos
+    (aepd.es).
+  </p>
+</Legal>

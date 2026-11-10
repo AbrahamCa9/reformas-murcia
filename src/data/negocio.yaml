@@ -1,0 +1,89 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# DATOS DEL NEGOCIO · fuente única de verdad
+# Lo que cambies aquí cambia en TODA la web: cabecera, pie, botones, schema,
+# formulario y textos legales. No hace falta tocar código.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Marca y web
+marca: Reformas Carrasco            # ⚠️ Provisional (ver "pendientes")
+eslogan: Reformas en Murcia y su región, de la visita a la entrega
+dominio: https://reformascarrasco.com   # Sin barra final. Es la URL canónica de la web.
+
+# Contacto (NAP: siempre igual en la web y en la ficha de Google)
+telefono: "+34 695 437 154"
+whatsapp: "+34 695 437 154"
+email: info@reformascarrasco.com
+
+# Ubicación. Sin local abierto al público: no se publica calle
+# (negocio de área de servicio, como recomienda Google Business Profile).
+ciudad: Murcia
+provincia: Murcia
+region: Región de Murcia
+pais: ES
+direccion_publica: null             # Ej.: { calle: "C/ Mayor 1", cp: "30001" } solo si hay local
+
+# Tipo de negocio en schema.org (GeneralContractor = empresa de reformas/contratista)
+tipo_schema: GeneralContractor
+
+# Horario. Vacío = no se publica.
+# Ejemplo: [{ dias: [Mo, Tu, We, Th, Fr], abre: "08:00", cierra: "19:00" }]
+horario: []
+
+# Prueba de confianza: SOLO datos reales. Vacío = la sección no se muestra.
+anios_experiencia: null
+certificaciones: []
+resenas:
+  nota: null                        # Ej.: 4.9
+  total: null                       # Ej.: 37
+  url_google: null                  # Enlace a la ficha de Google
+  testimonios: []                   # [{ nombre: "Ana", zona: "Molina de Segura", texto: "..." }] con permiso
+
+# Garantías y promesas que se muestran en "Por qué elegirnos" (revísalas: son compromisos tuyos)
+garantias:
+  - titulo: Presupuesto gratis y por escrito
+    texto: Vamos a ver la obra, medimos y te damos un presupuesto detallado por partidas, sin compromiso.
+  - titulo: Un solo responsable de principio a fin
+    texto: Coordinamos albañilería, fontanería, electricidad, carpintería y pintura. Tú hablas con una sola persona.
+  - titulo: Precio y plazo cerrados antes de empezar
+    texto: Antes de empezar firmamos qué se hace, cuánto cuesta y cuándo termina. Si algo cambia, lo hablamos antes.
+  - titulo: Obra limpia y ordenada
+    texto: Protegemos lo que no se toca, retiramos escombros y dejamos la zona recogida al acabar cada jornada.
+
+# Proceso de trabajo (sección "Cómo trabajamos").
+# {ayuntamiento} se cambia solo por el del pueblo de cada página ("el Ayuntamiento de Molina de Segura").
+proceso:
+  - titulo: Visita sin compromiso
+    texto: Nos cuentas qué quieres cambiar, vemos el espacio y tomamos medidas.
+  - titulo: Presupuesto detallado
+    texto: Te enviamos el presupuesto por partidas, con materiales y plazos, para que compares con calma.
+  - titulo: Permisos
+    texto: Te decimos si tu obra necesita declaración responsable o licencia en {ayuntamiento} y te ayudamos con el trámite.
+  - titulo: Obra con seguimiento
+    texto: Un responsable coordina a todos los oficios y te informa de cada avance.
+  - titulo: Entrega y repaso
+    texto: Revisamos juntos el resultado y repasamos cualquier detalle antes de dar la obra por terminada.
+
+# Colores de la marca (se aplican a toda la web)
+colores:
+  primario: "#1f2937"
+  acento: "#c2410c"
+
+# Analítica sin cookies (opcional). Ej.: { proveedor: plausible, dominio: reformascarrasco.com }
+analitica: null
+
+# Datos legales (aviso legal, privacidad). Obligatorios antes de publicar.
+legal:
+  titular: "[POR COMPLETAR: nombre y apellidos o razón social]"
+  nif: "[POR COMPLETAR]"
+  domicilio: "[POR COMPLETAR: domicilio a efectos de notificaciones]"
+
+# Lo que falta antes de publicar en el dominio real.
+# `npm run qa -- --estricto` (el que usa el despliegue a Hostinger) falla mientras haya algo aquí.
+pendientes:
+  - Confirmar la marca (hay una "Construcciones Carrasco" en el sector) y el dominio.
+  - Crear el email del dominio que recibirá el formulario.
+  - Rellenar los datos legales (titular, NIF y domicilio).
+  - Revisar que las garantías y el proceso son ciertos para tu negocio.
+  - Decidir si se publica horario.
+  - Añadir en "Sobre nosotros" quién está detrás (nombre, experiencia real y fotos del equipo).
+  - Añadir fotos reales de obras terminadas (ver docs/prompts-imagenes.md).

@@ -1,0 +1,90 @@
+---
+// Plantilla común: <head> SEO completo, cabecera, pie y barra móvil.
+// Indexación: solo el build de Hostinger (INDEXAR=si) es indexable; Vercel y local salen con noindex.
+import '../styles/global.css';
+import Cabecera from '../components/Cabecera.astro';
+import Pie from '../components/Pie.astro';
+import BarraMovil from '../components/BarraMovil.astro';
+import { negocio, INDEXAR, absoluta } from '../lib/datos';
+import { variablesColor } from '../lib/colores';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Ruta interna canónica con barra final, p. ej. /servicios/reforma-de-banos/ */
+  ruta: string;
+  /** Grafo JSON-LD de la página. */
+  schema?: object | null;
+  /** Páginas que nunca se indexan (gracias, 404, borradores). */
+  noindex?: boolean;
+  /** Texto prefijado de los botones de WhatsApp. */
+  mensajeWa?: string;
+  /** ¿La página tiene el formulario (#presupuesto)? Si no, los botones llevan a /contacto/. */
+  conFormulario?: boolean;
+  /** Tipo de plantilla (lo lee el QA). */
+  tipo?: string;
+}
+
+const {
+  title,
+  description,
+  ruta,
+  schema = null,
+  noindex = false,
+  mensajeWa = 'Hola, quiero pedir presupuesto para una reforma.',
+  conFormulario = true,
+  tipo = 'pagina',
+} = Astro.props;
+
+const canonical = absoluta(ruta);
+const robots = !INDEXAR ? 'noindex, nofollow' : noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large';
+const colores = Object.entries(variablesColor(negocio.colores.primario, negocio.colores.acento))
+  .map(([k, v]) => `${k}:${v}`)
+  .join(';');
+const jsonLd = schema ? JSON.stringify(schema).replace(/</g, '\\u003c') : null;
+const anclaPresupuesto = conFormulario ? '#presupuesto' : '/contacto/#presupuesto';
+const analitica = INDEXAR ? negocio.analitica : null;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content={robots} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content={negocio.marca} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="theme-color" content={negocio.colores.primario} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <style is:inline set:html={`html:root{${colores}}`} />
+    {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
+    {
+      analitica?.proveedor === 'plausible' && (
+        <script is:inline defer data-domain={analitica.dominio} src="https://plausible.io/js/script.js" />
+      )
+    }
+    {
+      analitica?.proveedor === 'umami' && analitica.id && (
+        <script is:inline defer data-website-id={analitica.id} src="https://cloud.umami.is/script.js" />
+      )
+    }
+  </head>
+  <body data-plantilla={tipo}>
+    <a class="saltar" href="#contenido">Saltar al contenido</a>
+    <Cabecera ruta={ruta} />
+    <main id="contenido">
+      <slot />
+    </main>
+    <Pie />
+    <BarraMovil mensajeWa={mensajeWa} anclaPresupuesto={anclaPresupuesto} />
+  </body>
+</html>

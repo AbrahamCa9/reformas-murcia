@@ -1,0 +1,34 @@
+---
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Seccion from '../components/Seccion.astro';
+import PorQueNosotros from '../components/PorQueNosotros.astro';
+import Proceso from '../components/Proceso.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+import { negocio } from '../lib/datos';
+import { pagina, rutas } from '../lib/contenido';
+import { grafo, migas as migasSchema, proveedor } from '../lib/schema';
+
+const p = await pagina('sobre-nosotros');
+const { Content } = await render(p);
+const migas = [
+  { nombre: 'Inicio', ruta: rutas.home },
+  { nombre: 'Sobre nosotros', ruta: rutas.sobreNosotros },
+];
+const mensajeWa = 'Hola, quiero pedir presupuesto para una reforma.';
+---
+
+<Base
+  title={`Sobre nosotros | ${negocio.marca}`}
+  description={`Quiénes somos y cómo trabajamos en ${negocio.marca}, empresa de reformas en ${negocio.ciudad}. ${p.data.intro}`.slice(0, 158)}
+  ruta={rutas.sobreNosotros}
+  schema={grafo([migasSchema(migas), proveedor()])}
+  mensajeWa={mensajeWa}
+>
+  <Hero h1={`Sobre ${negocio.marca}`} texto={p.data.intro} migas={migas} mensajeWa={mensajeWa} />
+  <Seccion id="contenido" alt><div class="prosa"><Content /></div></Seccion>
+  <PorQueNosotros />
+  <Proceso ayuntamiento={`el ayuntamiento de tu municipio`} alt />
+  <CtaFinal mensajeWa={mensajeWa} />
+</Base>

@@ -1,0 +1,6 @@
+# Redirecciones 301 (se aplican en Hostinger vía .htaccess).
+# Úsalas si cambias el slug de una página o si migras desde una web antigua.
+# Ejemplo:
+#   - desde: /reformas-banos-murcia/
+#     hasta: /servicios/reforma-de-banos/
+redirecciones: []

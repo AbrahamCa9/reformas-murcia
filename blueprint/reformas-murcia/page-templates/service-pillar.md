@@ -2,7 +2,7 @@
 tipo: service-pillar
 url: /servicios/{servicio_slug}/
 title: "{servicio} en {ciudad} | {marca}"
-meta_description: "{resumen} En {ciudad} y alrededores. Presupuesto gratis y sin compromiso: {telefono}."
+meta_description: "{resumen} En {ciudad}. Presupuesto gratis: {telefono}."
 h1: "{servicio} en {ciudad}"
 secciones: [hero, contenido, variantes, zonas-del-servicio, por-que-nosotros, proceso, precio, faq, relacionados, cta-final]
 schema: [Service, BreadcrumbList, FAQPage]

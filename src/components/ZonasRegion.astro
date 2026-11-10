@@ -1,0 +1,81 @@
+---
+// Zonas: pueblos con página propia + resto de municipios de la región (en texto, sin enlace).
+import Seccion from './Seccion.astro';
+import Icono from './Icono.astro';
+import type { Enlace } from '../lib/tipos';
+
+interface Props {
+  titulo: string;
+  intro?: string;
+  destacadas: Enlace[];
+  resto: string[];
+  alt?: boolean;
+}
+const { titulo, intro, destacadas, resto, alt } = Astro.props;
+---
+
+<Seccion id="zonas" titulo={titulo} intro={intro} alt={alt}>
+  <ul class="destacadas">
+    {
+      destacadas.map((z) => (
+        <li>
+          <a href={z.href}>
+            <Icono nombre="mapa" tam={22} />
+            <span>
+              <strong>{z.texto}</strong>
+              {z.detalle && <small>{z.detalle}</small>}
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  {
+    resto.length > 0 && (
+      <p class="resto">
+        <strong>También trabajamos en:</strong> {resto.join(', ')}.
+      </p>
+    )
+  }
+</Seccion>
+
+<style>
+  .destacadas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+    gap: 0.75rem;
+    margin: 0 0 1.5rem;
+    padding: 0;
+    list-style: none;
+  }
+  .destacadas a {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    height: 100%;
+    padding: 1rem;
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+    background: var(--fondo);
+    color: var(--texto);
+    text-decoration: none;
+  }
+  .destacadas a:hover {
+    border-color: var(--acento);
+  }
+  .destacadas :global(svg) {
+    flex: none;
+    color: var(--acento);
+  }
+  .destacadas span {
+    display: flex;
+    flex-direction: column;
+  }
+  .destacadas small {
+    color: var(--suave);
+  }
+  .resto {
+    max-width: 60rem;
+    color: var(--suave);
+  }
+</style>

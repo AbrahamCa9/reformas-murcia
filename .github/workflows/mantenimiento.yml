@@ -1,0 +1,43 @@
+# Revisión semanal: compila, pasa el QA y abre una issue si hay algo que atender.
+# La issue es el punto de partida para pedirle a Claude: "revisa la issue de mantenimiento".
+name: Mantenimiento semanal
+on:
+  schedule:
+    - cron: '0 7 * * 1' # lunes, 8:00 en Madrid (invierno)
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+jobs:
+  revisar:
+    runs-on: ubuntu-latest
+    env:
+      INDEXAR: si
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - id: qa
+        run: npm run qa -- --estricto || echo "fallo=si" >> "$GITHUB_OUTPUT"
+      - run: npm outdated > dependencias.txt || true
+      - name: Abrir issue si hay tareas
+        if: steps.qa.outputs.fallo == 'si'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          informe=$(ls -d qa/*/ | tail -1)REPORT.md
+          {
+            echo "Revisión automática del $(date +%d/%m/%Y). Pídele a Claude: «revisa la issue de mantenimiento»."
+            echo
+            cat "$informe"
+            echo
+            echo '## Dependencias desactualizadas'
+            echo '```'
+            cat dependencias.txt
+            echo '```'
+          } > cuerpo.md
+          gh issue create --title "Mantenimiento semanal $(date +%d/%m/%Y)" --body-file cuerpo.md

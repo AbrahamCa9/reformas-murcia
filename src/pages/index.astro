@@ -1,0 +1,103 @@
+---
+// HOME · plantilla blueprint/.../page-templates/home.md
+// Las secciones se pintan en el orden que marca la plantilla.
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Seccion from '../components/Seccion.astro';
+import RejillaServicios from '../components/RejillaServicios.astro';
+import PorQueNosotros from '../components/PorQueNosotros.astro';
+import ZonasRegion from '../components/ZonasRegion.astro';
+import Proceso from '../components/Proceso.astro';
+import Precio from '../components/Precio.astro';
+import Resenas from '../components/Resenas.astro';
+import PreguntasFrecuentes from '../components/PreguntasFrecuentes.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+import { negocio, municipios, hayResenas } from '../lib/datos';
+import { servicios, zonas, pagina, rutas } from '../lib/contenido';
+import { seo } from '../lib/plantillas';
+import { grafo, negocioCompleto, sitioWeb, faq } from '../lib/schema';
+
+const inicio = await pagina('inicio');
+const { Content } = await render(inicio);
+const s = seo('home', {});
+const lista = await servicios();
+const listaZonas = await zonas();
+
+const secciones = s.secciones.filter((x) => x !== 'resenas' || hayResenas);
+const mensajeWa = 'Hola, quiero pedir presupuesto para una reforma.';
+const puntos = negocio.garantias.slice(0, 3).map((g) => g.titulo);
+const resto = municipios
+  .filter((m) => m.nombre !== negocio.ciudad && !listaZonas.some((z) => z.id === m.slug))
+  .map((m) => m.nombre);
+
+const schema = grafo([
+  negocioCompleto(lista.map((x) => ({ nombre: x.data.nombre, ruta: rutas.servicio(x.id) }))),
+  sitioWeb(),
+  faq(inicio.data.faqs),
+]);
+---
+
+<Base title={s.title} description={s.description} ruta={rutas.home} schema={schema} tipo="home" mensajeWa={mensajeWa}>
+  {
+    secciones.map((sec, i) => {
+      const alt = i % 2 === 1;
+      switch (sec) {
+        case 'hero':
+          return <Hero h1={s.h1} texto={inicio.data.intro} puntos={puntos} mensajeWa={mensajeWa} />;
+        case 'servicios':
+          return (
+            <Seccion
+              id="servicios"
+              titulo={`Servicios de reformas en ${negocio.ciudad}`}
+              intro="Desde cambiar una bañera por un plato de ducha hasta la reforma integral de un piso o un chalet. Elige tu servicio para ver qué incluye:"
+              alt={alt}
+            >
+              <RejillaServicios
+                items={lista.map((x) => ({
+                  nombre: x.data.nombre,
+                  resumen: x.data.resumen,
+                  icono: x.data.icono,
+                  href: rutas.servicio(x.id),
+                }))}
+              />
+            </Seccion>
+          );
+        case 'presentacion':
+          return (
+            <Seccion id="presentacion" alt={alt}>
+              <div class="prosa">
+                <Content />
+              </div>
+            </Seccion>
+          );
+        case 'por-que-nosotros':
+          return <PorQueNosotros alt={alt} />;
+        case 'zonas':
+          return (
+            <ZonasRegion
+              titulo={`Reformas en ${negocio.ciudad} y en toda la región`}
+              intro={`Trabajamos en ${negocio.ciudad} capital y en los pueblos de la ${negocio.region}. Estos tienen página propia con información local:`}
+              destacadas={listaZonas.map((z) => ({ texto: `Reformas en ${z.data.nombre}`, href: rutas.zona(z.id), detalle: z.data.comarca }))}
+              resto={resto}
+              alt={alt}
+            />
+          );
+        case 'proceso':
+          return <Proceso ayuntamiento={`el Ayuntamiento de ${negocio.ciudad}`} alt={alt} />;
+        case 'precio':
+          return (
+            <Precio titulo={`¿Cuánto cuesta una reforma en ${negocio.ciudad}?`} factores={inicio.data.factores_precio} alt={alt} />
+          );
+        case 'resenas':
+          return <Resenas alt={alt} />;
+        case 'faq':
+          return <PreguntasFrecuentes titulo="Preguntas frecuentes sobre reformas" preguntas={inicio.data.faqs} alt={alt} />;
+        case 'cta-final':
+          return <CtaFinal mensajeWa={mensajeWa} alt={alt} />;
+        default:
+          throw new Error(`La plantilla home pide la sección "${sec}", que no existe en src/pages/index.astro`);
+      }
+    })
+  }
+</Base>

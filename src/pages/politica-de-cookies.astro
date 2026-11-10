@@ -1,0 +1,27 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { negocio } from '../lib/datos';
+import { rutas } from '../lib/contenido';
+const analitica = negocio.analitica;
+---
+
+<Legal titulo="Política de cookies" descripcion={`Política de cookies de ${negocio.marca}: esta web no usa cookies de seguimiento ni de publicidad. Te explicamos qué pasa con los enlaces externos.`} ruta={rutas.cookies}>
+  <h2>Esta web no usa cookies</h2>
+  <p>
+    No instalamos cookies propias ni de terceros para publicidad o seguimiento. Por eso no te mostramos ningún aviso de
+    cookies.
+  </p>
+  {
+    analitica && (
+      <p>
+        Para saber cuántas personas visitan la web usamos {analitica.proveedor === 'plausible' ? 'Plausible' : 'Umami'}, una
+        analítica que no usa cookies ni guarda datos personales.
+      </p>
+    )
+  }
+  <h2>Enlaces a otros servicios</h2>
+  <p>
+    Si pulsas el botón de WhatsApp o un enlace a otra web, esa web puede usar sus propias cookies según su política.
+  </p>
+  <p>Si en el futuro añadimos cookies, actualizaremos esta página y te pediremos permiso antes de usarlas.</p>
+</Legal>

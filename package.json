@@ -1,0 +1,30 @@
+{
+  "name": "reformas-murcia",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Web agéntica y autogestionable de una empresa de reformas en Murcia. Astro + datos editables + QA automático.",
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "generar": "node scripts/generar-landings.mjs",
+    "qa": "node scripts/qa.mjs",
+    "verificar": "astro check && astro build && node scripts/qa.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "3.7.4",
+    "astro": "7.4.8",
+    "yaml": "2.9.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.12",
+    "node-html-parser": "9.0.7",
+    "schema-dts": "2.1.0",
+    "typescript": "6.0.3"
+  }
+}

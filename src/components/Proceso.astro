@@ -1,0 +1,59 @@
+---
+// Proceso en 5 pasos. {ayuntamiento} se sustituye por el del pueblo de la página.
+import Seccion from './Seccion.astro';
+import { negocio } from '../lib/datos';
+
+interface Props {
+  titulo?: string;
+  intro?: string;
+  ayuntamiento?: string;
+  alt?: boolean;
+}
+const { titulo = 'Cómo trabajamos', intro, ayuntamiento = 'el ayuntamiento', alt } = Astro.props;
+const pasos = negocio.proceso.map((p) => ({ ...p, texto: p.texto.replaceAll('{ayuntamiento}', ayuntamiento) }));
+---
+
+<Seccion id="proceso" titulo={titulo} intro={intro} alt={alt}>
+  <ol class="pasos">
+    {
+      pasos.map((p, i) => (
+        <li>
+          <span class="paso-num" aria-hidden="true">
+            {i + 1}
+          </span>
+          <h3>{p.titulo}</h3>
+          <p>{p.texto}</p>
+        </li>
+      ))
+    }
+  </ol>
+</Seccion>
+
+<style>
+  .pasos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 12.5rem), 1fr));
+    gap: 1.5rem 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .paso-num {
+    display: grid;
+    place-items: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    background: var(--acento);
+    color: #fff;
+    font-weight: 800;
+  }
+  .pasos h3 {
+    margin: 0.7rem 0 0.3rem;
+    font-size: 1.08rem;
+  }
+  .pasos p {
+    margin: 0;
+    color: var(--suave);
+  }
+</style>
