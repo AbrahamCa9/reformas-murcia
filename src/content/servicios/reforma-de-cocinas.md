@@ -2,6 +2,7 @@
 nombre: "Reforma de cocinas"
 resumen: "Cocinas nuevas a medida: distribución, muebles, encimera, instalaciones y electrodomésticos, de principio a fin."
 icono: cocina
+foto: cocina-reformada-abierta-al-salon
 titulo_variantes: "Tipos de reforma de cocina"
 variantes:
   - titulo: "Reforma completa"

@@ -37,6 +37,7 @@ const servicios = defineCollection({
     titulo_precio: z.string().default('Qué influye en el precio en {zona}'), // {zona} = Murcia o el pueblo
     factores_precio: z.array(z.string().min(10)).min(3),
     precio_orientativo: z.string().optional(), // solo si el negocio define sus precios
+    foto: z.string().optional(), // archivo de data/fotos.yaml (cabecera y tarjeta del servicio)
     faqs: z.array(pregunta).min(5),
     relacionados: z.array(reference('servicios')).min(3),
     pendiente: z.boolean().default(false), // true = borrador creado por `npm run generar`
@@ -80,6 +81,7 @@ const paginas = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/paginas' }),
   schema: z.object({
     intro: z.string().min(40), // entradilla bajo el H1
+    foto: z.string().optional(), // archivo de data/fotos.yaml para la cabecera
     faqs: z.array(pregunta).default([]),
     factores_precio: z.array(z.string().min(10)).default([]),
     actualizado: z.coerce.date(),

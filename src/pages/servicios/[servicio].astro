@@ -14,6 +14,7 @@ import Precio from '../../components/Precio.astro';
 import PreguntasFrecuentes from '../../components/PreguntasFrecuentes.astro';
 import CtaFinal from '../../components/CtaFinal.astro';
 import { negocio } from '../../lib/datos';
+import { foto } from '../../lib/fotos';
 import { servicios, zonas, zonasDeServicio, rutas, type Servicio } from '../../lib/contenido';
 import { seo, enMinuscula } from '../../lib/plantillas';
 import { grafo, servicio as servicioSchema, migas as migasSchema, faq } from '../../lib/schema';
@@ -72,7 +73,7 @@ const enlacesZonas = conPagina.length
       const alt = i % 2 === 1;
       switch (sec) {
         case 'hero':
-          return <Hero h1={p.h1} texto={d.resumen} migas={migas} puntos={puntos} mensajeWa={mensajeWa} />;
+          return <Hero h1={p.h1} texto={d.resumen} migas={migas} puntos={puntos} mensajeWa={mensajeWa} foto={foto(d.foto)} />;
         case 'contenido':
           return (
             <Seccion id="contenido" alt={alt}>

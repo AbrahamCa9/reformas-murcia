@@ -1,9 +1,12 @@
 ---
 // Cabecera de página: H1, entradilla, puntos de confianza y los 3 botones de contacto.
+// Con `foto`, la foto va de fondo con un degradado oscuro para que el texto se lea bien.
+import { Picture } from 'astro:assets';
 import Icono from './Icono.astro';
 import Migas from './Migas.astro';
 import { contacto } from '../lib/datos';
 import type { Miga } from '../lib/schema';
+import type { Foto } from '../lib/fotos';
 
 interface Props {
   h1: string;
@@ -12,12 +15,30 @@ interface Props {
   puntos?: string[];
   mensajeWa: string;
   anclaPresupuesto?: string;
+  foto?: Foto;
 }
-const { h1, texto, migas, puntos = [], mensajeWa, anclaPresupuesto = '#presupuesto' } = Astro.props;
+const { h1, texto, migas, puntos = [], mensajeWa, anclaPresupuesto = '#presupuesto', foto } = Astro.props;
 const wa = contacto.whatsappHref ? `${contacto.whatsappHref}?text=${encodeURIComponent(mensajeWa)}` : null;
 ---
 
-<section class="hero" aria-labelledby="titulo-pagina">
+<section class:list={['hero', { 'hero-con-foto': foto }]} aria-labelledby="titulo-pagina">
+  {
+    foto && (
+      <Picture
+        src={foto.src}
+        alt={foto.alt}
+        formats={['webp']}
+        fallbackFormat="webp"
+        widths={[640, 960, 1280, 1600]}
+        sizes="100vw"
+        quality={62}
+        loading="eager"
+        fetchpriority="high"
+        class="hero-foto"
+        pictureAttributes={{ class: 'hero-foto-marco' }}
+      />
+    )
+  }
   <div class="contenedor">
     {migas && <Migas items={migas} />}
     <h1 id="titulo-pagina">{h1}</h1>
@@ -51,16 +72,49 @@ const wa = contacto.whatsappHref ? `${contacto.whatsappHref}?text=${encodeURICom
 
 <style>
   .hero {
+    position: relative;
+    isolation: isolate;
     padding-block: clamp(2.25rem, 6vw, 4.25rem);
     background-color: var(--marca);
     background-image: radial-gradient(120% 140% at 100% 0%, var(--hero-brillo) 0%, var(--marca) 60%);
     color: #fff;
   }
+  .hero-con-foto {
+    display: flex;
+    align-items: center;
+    min-height: min(82vh, 40rem);
+    padding-block: clamp(3rem, 8vw, 5.5rem);
+    background-image: none;
+  }
+  .hero-con-foto::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg, rgb(17 24 39 / 0.82) 0%, rgb(17 24 39 / 0.7) 100%);
+  }
+  @media (min-width: 48rem) {
+    .hero-con-foto::before {
+      background: linear-gradient(90deg, rgb(17 24 39 / 0.92) 0%, rgb(17 24 39 / 0.8) 40%, rgb(17 24 39 / 0.15) 85%);
+    }
+  }
+  .hero :global(.hero-foto-marco) {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+  }
+  .hero :global(.hero-foto) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 70% 50%;
+  }
   .hero h1 {
-    max-width: 26ch;
+    max-width: 22ch;
+    font-size: clamp(2.2rem, 6vw, 3.6rem);
   }
   .hero-texto {
-    max-width: 42rem;
+    max-width: 40rem;
     color: #e5e7eb;
     font-size: clamp(1.1rem, 2.4vw, 1.3rem);
   }
@@ -80,5 +134,14 @@ const wa = contacto.whatsappHref ? `${contacto.whatsappHref}?text=${encodeURICom
   }
   .hero-puntos :global(svg) {
     color: #fdba74;
+  }
+  .hero-con-foto .hero-puntos {
+    max-width: 44rem;
+  }
+  .hero-con-foto .hero-puntos li {
+    padding: 0.3rem 0.75rem 0.3rem 0.55rem;
+    border: 1px solid rgb(255 255 255 / 0.16);
+    border-radius: 999px;
+    background: rgb(17 24 39 / 0.55);
   }
 </style>

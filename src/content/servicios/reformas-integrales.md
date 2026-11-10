@@ -2,6 +2,7 @@
 nombre: "Reformas integrales"
 resumen: "Reforma completa de pisos y casas: distribución, instalaciones y acabados, con un solo responsable de obra."
 icono: casa
+foto: salon-de-piso-reformado
 titulo_variantes: "Tipos de reforma integral"
 variantes:
   - titulo: "Reforma integral de piso"

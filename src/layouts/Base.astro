@@ -7,6 +7,7 @@ import Pie from '../components/Pie.astro';
 import BarraMovil from '../components/BarraMovil.astro';
 import { negocio, INDEXAR, absoluta } from '../lib/datos';
 import { variablesColor } from '../lib/colores';
+import fuenteTitulos from '@fontsource/bricolage-grotesque/files/bricolage-grotesque-latin-700-normal.woff2?url';
 
 interface Props {
   title: string;
@@ -44,6 +45,9 @@ const colores = Object.entries(variablesColor(negocio.colores.primario, negocio.
 const jsonLd = schema ? JSON.stringify(schema).replace(/</g, '\\u003c') : null;
 const anclaPresupuesto = conFormulario ? '#presupuesto' : '/contacto/#presupuesto';
 const analitica = INDEXAR ? negocio.analitica : null;
+// Fuente de los títulos: un solo archivo (latín, 700). `optional` evita saltos de diseño:
+// si no llega a tiempo en la primera visita, se usa la del sistema.
+const fuenteCss = `@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:700;font-display:optional;src:url(${fuenteTitulos}) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF,U+FFFD}`;
 ---
 
 <!doctype html>
@@ -65,7 +69,8 @@ const analitica = INDEXAR ? negocio.analitica : null;
     <meta name="theme-color" content={negocio.colores.primario} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <style is:inline set:html={`html:root{${colores}}`} />
+    <link rel="preload" href={fuenteTitulos} as="font" type="font/woff2" crossorigin />
+    <style is:inline set:html={`${fuenteCss}html:root{${colores}}`} />
     {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
     {
       analitica?.proveedor === 'plausible' && (

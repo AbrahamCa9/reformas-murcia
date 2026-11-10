@@ -16,6 +16,7 @@ import CtaFinal from '../components/CtaFinal.astro';
 import { negocio, municipios, hayResenas } from '../lib/datos';
 import { servicios, zonas, pagina, rutas } from '../lib/contenido';
 import { seo } from '../lib/plantillas';
+import { foto } from '../lib/fotos';
 import { grafo, negocioCompleto, sitioWeb, faq } from '../lib/schema';
 
 const inicio = await pagina('inicio');
@@ -44,7 +45,7 @@ const schema = grafo([
       const alt = i % 2 === 1;
       switch (sec) {
         case 'hero':
-          return <Hero h1={s.h1} texto={inicio.data.intro} puntos={puntos} mensajeWa={mensajeWa} />;
+          return <Hero h1={s.h1} texto={inicio.data.intro} puntos={puntos} mensajeWa={mensajeWa} foto={foto(inicio.data.foto)} />;
         case 'servicios':
           return (
             <Seccion
@@ -59,6 +60,7 @@ const schema = grafo([
                   resumen: x.data.resumen,
                   icono: x.data.icono,
                   href: rutas.servicio(x.id),
+                  foto: foto(x.data.foto),
                 }))}
               />
             </Seccion>

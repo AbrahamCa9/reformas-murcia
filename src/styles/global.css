@@ -1,6 +1,7 @@
 /* ───────────────────────────────────────────────────────────────────────────
-   Estilos globales. Sin fuentes externas ni frameworks: CSS mínimo para que
+   Estilos globales. Sin frameworks ni fuentes de terceros: CSS mínimo para que
    la web cargue en < 2,5 s en móvil (presupuesto heredado de la competencia).
+   Solo hay una fuente propia (títulos, 22 KB), servida desde la web y precargada en Base.astro.
    Los colores de marca llegan desde src/data/negocio.yaml: Base.astro los
    sobrescribe (--marca, --acento y sus tonos calculados).
    ─────────────────────────────────────────────────────────────────────────── */
@@ -18,10 +19,12 @@
   --fondo: #ffffff;
   --fondo-alt: #f7f5f2;
   --borde: #e6e1d9;
-  --radio: 12px;
-  --sombra: 0 1px 2px rgb(0 0 0 / 0.06), 0 4px 16px rgb(0 0 0 / 0.06);
+  --radio: 16px;
+  --sombra: 0 1px 2px rgb(0 0 0 / 0.05), 0 6px 20px -6px rgb(0 0 0 / 0.1);
+  --sombra-alta: 0 2px 4px rgb(0 0 0 / 0.06), 0 16px 36px -10px rgb(0 0 0 / 0.22);
   --ancho: 72rem;
   --fuente: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --fuente-titulos: 'Bricolage Grotesque', var(--fuente);
 }
 
 *,
@@ -69,25 +72,24 @@ a:hover {
 h1,
 h2,
 h3 {
-  line-height: 1.2;
-  letter-spacing: -0.01em;
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
   margin: 0 0 0.6em;
   text-wrap: balance;
 }
 
 h1 {
   font-size: clamp(2rem, 5.5vw, 3.1rem);
-  font-weight: 800;
 }
 
 h2 {
-  font-size: clamp(1.55rem, 3.6vw, 2.1rem);
-  font-weight: 800;
+  font-size: clamp(1.65rem, 3.8vw, 2.35rem);
 }
 
 h3 {
   font-size: 1.2rem;
-  font-weight: 700;
 }
 
 p {
@@ -131,7 +133,7 @@ p {
   gap: 0.5rem;
   min-height: 48px;
   padding: 0.75rem 1.25rem;
-  border-radius: 10px;
+  border-radius: 12px;
   border: 2px solid transparent;
   font: inherit;
   font-weight: 700;
@@ -141,12 +143,19 @@ p {
   transition:
     background 0.15s,
     color 0.15s,
-    border-color 0.15s;
+    border-color 0.15s,
+    box-shadow 0.15s,
+    transform 0.15s;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
 }
 
 .btn-acento {
   background: var(--acento);
   color: #fff;
+  box-shadow: 0 10px 24px -10px rgb(194 65 12 / 0.7);
 }
 
 .btn-acento:hover {
@@ -192,7 +201,17 @@ p {
 
 .seccion-cabecera {
   max-width: 46rem;
-  margin-bottom: 2rem;
+  margin-bottom: 2.25rem;
+}
+
+.seccion-cabecera h2::after {
+  content: '';
+  display: block;
+  width: 3.5rem;
+  height: 4px;
+  margin-top: 0.75rem;
+  border-radius: 2px;
+  background: var(--acento);
 }
 
 .seccion-cabecera p {

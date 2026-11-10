@@ -13,6 +13,7 @@ import Precio from '../../components/Precio.astro';
 import PreguntasFrecuentes from '../../components/PreguntasFrecuentes.astro';
 import CtaFinal from '../../components/CtaFinal.astro';
 import { negocio, pares, plantillas } from '../../lib/datos';
+import { foto } from '../../lib/fotos';
 import {
   servicios,
   zonas,
@@ -109,7 +110,7 @@ const schema = grafo([
       const alt = i % 2 === 1;
       switch (sec) {
         case 'hero':
-          return <Hero h1={p.h1} texto={l.data.gancho} migas={migas} puntos={puntos} mensajeWa={mensajeWa} />;
+          return <Hero h1={p.h1} texto={l.data.gancho} migas={migas} puntos={puntos} mensajeWa={mensajeWa} foto={foto(s.data.foto)} />;
         case 'contenido-local':
           return (
             <Seccion id="contenido-local" alt={alt}>

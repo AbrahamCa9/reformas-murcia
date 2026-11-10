@@ -1,5 +1,6 @@
 ---
 intro: "Reformamos pisos, casas y locales en Murcia y en los pueblos de la región: baños, cocinas, reformas integrales, fachadas e instalaciones. Te damos el presupuesto gratis y por escrito."
+foto: cocina-reformada-abierta-al-salon
 factores_precio:
   - "Los metros y el estado de partida: no es lo mismo renovar acabados que cambiar instalaciones antiguas."
   - "Si se cambia la distribución: tirar o levantar tabiques, mover puntos de agua, desagües o enchufes."

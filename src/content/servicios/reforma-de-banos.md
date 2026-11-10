@@ -2,6 +2,7 @@
 nombre: "Reforma de baños"
 resumen: "Reformamos tu baño completo o por partes: ducha en lugar de bañera, alicatado, sanitarios, mueble y fontanería."
 icono: bano
+foto: bano-reformado-con-plato-de-ducha
 titulo_variantes: "Qué reformamos en tu baño"
 variantes:
   - titulo: "Reforma completa del baño"

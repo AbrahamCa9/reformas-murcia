@@ -1,4 +1,5 @@
 // Tipos compartidos por los componentes.
+import type { Foto } from './fotos';
 
 /** Enlace interno con texto descriptivo del destino. */
 export interface Enlace {
@@ -14,4 +15,6 @@ export interface ItemServicio {
   icono: string;
   resumen?: string;
   etiqueta?: string;
+  /** Con foto, la tarjeta sale grande y primero. */
+  foto?: Foto;
 }

@@ -30,6 +30,7 @@ automático impide publicar páginas flojas.
 | Contrato de datos estructurados | `blueprint/reformas-murcia/schema-templates/*.jsonld` |
 | Reglas de enlazado interno y presupuesto de velocidad | `blueprint/reformas-murcia/internal-linking.yaml`, `lighthouse-budget.json` |
 | Textos | `src/content/servicios/`, `zonas/`, `landings/{servicio}/{pueblo}.md`, `paginas/` |
+| Fotos (origen y alt) | `data/fotos.yaml` → `src/assets/fotos/`; se asignan con el campo `foto` del contenido |
 | Datos verificados de pueblos | `data/zonas/` |
 | Investigación de competencia (Fases 1-3) | `data/local-pack/`, `data/web-patterns/`, `data/patterns/` |
 | Formulario (PHP para Hostinger) | `public/api/contacto.php` (+ `api/config.php` que genera el build) |
@@ -51,7 +52,10 @@ INDEXAR=si npm run build         # build de producción (indexable)
 - Añadir pueblos o servicios → `.claude/skills/ampliar-zonas-y-servicios/SKILL.md`
 - Revisar el control de calidad o la issue semanal → `.claude/skills/qa-web/SKILL.md`
 - Volver a estudiar la competencia → `.claude/skills/refrescar-competencia/SKILL.md`
-- Fotos: Claude no genera fotos realistas; ver `docs/prompts-imagenes.md`.
+- Fotos de ambiente: se generan con el fal.ai del usuario (modelo más barato, `fal-ai/z-image/turbo`, ~1 céntimo;
+  di el coste antes de generar lotes), se apuntan en `data/fotos.yaml` y el workflow "Importar fotos" las baja
+  a `src/assets/fotos/` (este entorno no puede descargar de fal.media). Las de trabajos realizados, siempre reales.
+  Prompts de referencia: `docs/prompts-imagenes.md`.
 
 ## Cómo funciona la indexación
 
