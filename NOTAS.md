@@ -9,6 +9,8 @@
   (El SEO marca 66 en pruebas solo porque la versión de pruebas lleva noindex a propósito.)
 - Textos completos: home, reformas integrales, reforma de baños, reforma de cocinas, los 3 pueblos
   (Molina de Segura, Alcantarilla, Ceutí) y sus 9 páginas servicio × pueblo.
+- Vista previa en Vercel (solo pruebas, siempre noindex): cada push a `borrador` crea una vista previa
+  y Vercel deja el enlace en la PR. La versión de `main` sale con 404 hasta que se publique la web.
 - 9 servicios en borrador (`pendiente: true`, noindex): cambio de bañera por plato de ducha, fachadas,
   instalaciones eléctricas, fontanería, garajes, locales y oficinas, pintura, pladur e impermeabilización.
 
