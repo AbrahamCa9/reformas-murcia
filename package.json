@@ -13,6 +13,7 @@
     "preview": "astro preview",
     "check": "astro check",
     "generar": "node scripts/generar-landings.mjs",
+    "fotos": "node scripts/importar-fotos.mjs",
     "qa": "node scripts/qa.mjs",
     "verificar": "astro check && astro build && node scripts/qa.mjs"
   },
@@ -25,6 +26,7 @@
     "@astrojs/check": "0.9.12",
     "node-html-parser": "9.0.7",
     "schema-dts": "2.1.0",
+    "sharp": "0.35.5",
     "typescript": "6.0.3"
   }
 }
