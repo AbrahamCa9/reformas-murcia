@@ -1,6 +1,6 @@
 # Notas y pendientes
 
-Última actualización: 10/11/2026
+Última actualización: 11/11/2026
 
 ## Estado
 
@@ -11,20 +11,18 @@
   (Molina de Segura, Alcantarilla, Ceutí) y sus 9 páginas servicio × pueblo.
 - Vista previa en Vercel (solo pruebas, siempre noindex): cada push a `borrador` crea una vista previa
   y Vercel deja el enlace en la PR. La versión de `main` sale con 404 hasta que se publique la web.
-- 9 servicios en borrador (`pendiente: true`, noindex): cambio de bañera por plato de ducha, fachadas,
-  instalaciones eléctricas, fontanería, garajes, locales y oficinas, pintura, pladur e impermeabilización.
+- Los 12 servicios tienen texto completo (los 9 que estaban en borrador se escribieron el 11/11/2026).
 
 ## Pendiente antes de publicar (el despliegue no publica hasta resolverlo)
 
 1. Decidir la marca y el dominio (hay una "Construcciones Carrasco" en el sector).
-2. Escribir los 9 servicios en borrador.
-3. Datos legales en `src/data/negocio.yaml` (titular, NIF, domicilio) y revisar los textos legales con un gestor.
-4. Crear el email del dominio que recibe el formulario.
-5. Revisar que garantías y proceso de `negocio.yaml` son ciertos.
-6. "Sobre nosotros": quién está detrás, experiencia real, fotos del equipo.
-7. Fotos reales de obras (ver `docs/prompts-imagenes.md`).
-8. Hosting: Hostinger + secretos FTP en GitHub + variable `DEPLOY_ENABLED=true`.
-9. Ficha de Google Business Profile con el mismo nombre, teléfono y web.
+2. Datos legales en `src/data/negocio.yaml` (titular, NIF, domicilio) y revisar los textos legales con un gestor.
+3. Crear el email del dominio que recibe el formulario.
+4. Revisar que garantías y proceso de `negocio.yaml` son ciertos.
+5. "Sobre nosotros": quién está detrás, experiencia real, fotos del equipo.
+6. Fotos reales de obras (ver `docs/prompts-imagenes.md`).
+7. Hosting: Hostinger + secretos FTP en GitHub + variable `DEPLOY_ENABLED=true`.
+8. Ficha de Google Business Profile con el mismo nombre, teléfono y web.
 
 ## Telegram (opcional, ya programado)
 
