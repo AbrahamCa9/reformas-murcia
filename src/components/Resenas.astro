@@ -1,0 +1,73 @@
+---
+// Reseñas: SOLO las reales de negocio.yaml. Sin datos, la sección no se pinta.
+import Seccion from './Seccion.astro';
+import Icono from './Icono.astro';
+import { negocio } from '../lib/datos';
+
+interface Props {
+  alt?: boolean;
+}
+const { alt } = Astro.props;
+const { nota, total, url_google, testimonios } = negocio.resenas;
+const hayResenas = Boolean((nota && total) || testimonios.length);
+---
+
+{
+  hayResenas && (
+    <Seccion id="resenas" titulo="Lo que dicen nuestros clientes" alt={alt}>
+      {nota && total && (
+        <p class="nota">
+          <Icono nombre="estrella" tam={22} />
+          <strong>{nota.toLocaleString('es-ES')}</strong> de 5 en Google · {total} reseñas
+          {url_google && (
+            <a href={url_google} target="_blank" rel="noopener">
+              Ver en Google
+            </a>
+          )}
+        </p>
+      )}
+      {testimonios.length > 0 && (
+        <ul class="rejilla testimonios">
+          {testimonios.map((t) => (
+            <li class="tarjeta">
+              <blockquote>
+                <p>“{t.texto}”</p>
+              </blockquote>
+              <p class="autor">
+                {t.nombre}
+                {t.zona && ` · ${t.zona}`}
+              </p>
+            </li>
+          ))}
+        </ul>
+      )}
+    </Seccion>
+  )
+}
+
+<style>
+  .nota {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.1rem;
+  }
+  .nota :global(svg) {
+    color: #f59e0b;
+    fill: #f59e0b;
+  }
+  .testimonios {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  blockquote {
+    margin: 0;
+  }
+  .autor {
+    margin: 0;
+    color: var(--suave);
+    font-weight: 700;
+  }
+</style>

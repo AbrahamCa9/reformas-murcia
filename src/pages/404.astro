@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+import Seccion from '../components/Seccion.astro';
+import RejillaServicios from '../components/RejillaServicios.astro';
+import { negocio } from '../lib/datos';
+import { servicios, rutas } from '../lib/contenido';
+
+const lista = (await servicios()).slice(0, 6);
+---
+
+<Base
+  title={`Página no encontrada | ${negocio.marca}`}
+  description="La página que buscas no existe o ha cambiado de dirección."
+  ruta="/404/"
+  noindex
+  conFormulario={false}
+  tipo="noindex"
+>
+  <Seccion id="no-encontrada" tituloId="no-encontrada-titulo">
+    <div class="seccion-cabecera">
+      <h1 id="no-encontrada-titulo">No encontramos esta página</h1>
+      <p>Puede que haya cambiado de dirección. Estos son algunos de nuestros servicios:</p>
+    </div>
+    <RejillaServicios items={lista.map((s) => ({ nombre: s.data.nombre, resumen: s.data.resumen, icono: s.data.icono, href: rutas.servicio(s.id) }))} />
+    <p class="volver"><a class="btn btn-acento" href={rutas.home}>Ir al inicio</a></p>
+  </Seccion>
+</Base>
+
+<style>
+  .volver { margin-top: 2rem; }
+</style>

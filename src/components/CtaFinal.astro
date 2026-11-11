@@ -1,0 +1,100 @@
+---
+// Llamada final: teléfono, WhatsApp y formulario. Es el destino del botón "Presupuesto" (#presupuesto).
+import Seccion from './Seccion.astro';
+import Formulario from './Formulario.astro';
+import Icono from './Icono.astro';
+import { negocio, contacto } from '../lib/datos';
+
+interface Props {
+  titulo?: string;
+  texto?: string;
+  servicio?: string;
+  zona?: string;
+  mensajeWa: string;
+  alt?: boolean;
+}
+const {
+  titulo = 'Pide tu presupuesto gratis',
+  texto = 'Cuéntanos qué quieres reformar. Te llamamos, quedamos para ver la obra y te enviamos el presupuesto por escrito, sin compromiso.',
+  servicio,
+  zona,
+  mensajeWa,
+  alt,
+} = Astro.props;
+const wa = contacto.whatsappHref ? `${contacto.whatsappHref}?text=${encodeURIComponent(mensajeWa)}` : null;
+---
+
+<Seccion id="presupuesto" tituloId="presupuesto-titulo" alt={alt}>
+  <div class="cta">
+    <div class="cta-texto">
+      <h2 id="presupuesto-titulo">{titulo}</h2>
+      <p>{texto}</p>
+      <ul class="cta-contacto">
+        <li>
+          <a class="btn btn-acento" href={contacto.telefonoHref}>
+            <Icono nombre="telefono" tam={20} /> Llamar al {contacto.telefonoVisible}
+          </a>
+        </li>
+        {
+          wa && (
+            <li>
+              <a class="btn btn-wa" href={wa} target="_blank" rel="noopener">
+                <Icono nombre="whatsapp" tam={20} /> Escribir por WhatsApp
+              </a>
+            </li>
+          )
+        }
+      </ul>
+      <p class="cta-zona">
+        <Icono nombre="mapa" tam={20} />
+        <span>Trabajamos en {zona ?? negocio.ciudad} y en el resto de la {negocio.region}.</span>
+      </p>
+    </div>
+    <Formulario servicio={servicio} zona={zona} mensajeWa={mensajeWa} />
+  </div>
+</Seccion>
+
+<style>
+  .cta {
+    display: grid;
+    gap: 2rem;
+    align-items: start;
+  }
+  .cta-texto p {
+    color: var(--suave);
+    font-size: 1.08rem;
+  }
+  .cta-contacto {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 1.25rem 0;
+    padding: 0;
+    list-style: none;
+  }
+  .cta-contacto .btn {
+    width: 100%;
+  }
+  .cta-zona {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .cta-zona :global(svg) {
+    flex: none;
+    margin-top: 0.2em;
+    color: var(--acento);
+  }
+  @media (min-width: 56rem) {
+    .cta {
+      grid-template-columns: 1fr 1.3fr;
+      gap: 3rem;
+    }
+    .cta-contacto .btn {
+      width: auto;
+    }
+    .cta-contacto {
+      align-items: flex-start;
+    }
+  }
+</style>

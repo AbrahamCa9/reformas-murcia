@@ -1,0 +1,153 @@
+---
+// Tarjetas de servicio: toda la tarjeta es clicable y enlaza con texto descriptivo.
+// Los servicios con foto salen primero, en tarjetas grandes; el resto, en tarjetas con icono.
+import { Image } from 'astro:assets';
+import Icono from './Icono.astro';
+import type { ItemServicio } from '../lib/tipos';
+interface Props {
+  items: ItemServicio[];
+}
+const { items } = Astro.props;
+const conFoto = items.filter((s) => s.foto);
+const sinFoto = items.filter((s) => !s.foto);
+---
+
+{
+  conFoto.length > 0 && (
+    <ul class="rejilla servicios servicios-destacados">
+      {conFoto.map((s) => (
+        <li class="tarjeta servicio servicio-con-foto">
+          <Image
+            src={s.foto!.src}
+            alt={s.foto!.alt}
+            format="webp"
+            widths={[480, 800]}
+            sizes="(min-width: 64rem) 23rem, (min-width: 40rem) 46vw, 92vw"
+            quality={65}
+            class="servicio-foto"
+          />
+          <div class="servicio-cuerpo">
+            <h3>
+              <a href={s.href}>{s.nombre}</a>
+            </h3>
+            {s.resumen && <p>{s.resumen}</p>}
+            <span class="servicio-mas" aria-hidden="true">
+              {s.etiqueta ?? 'Ver servicio'} <Icono nombre="flecha" tam={18} />
+            </span>
+          </div>
+        </li>
+      ))}
+    </ul>
+  )
+}
+{
+  sinFoto.length > 0 && (
+    <ul class="rejilla servicios">
+      {sinFoto.map((s) => (
+        <li class="tarjeta servicio">
+          <span class="servicio-icono">
+            <Icono nombre={s.icono} />
+          </span>
+          <h3>
+            <a href={s.href}>{s.nombre}</a>
+          </h3>
+          {s.resumen && <p>{s.resumen}</p>}
+          <span class="servicio-mas" aria-hidden="true">
+            {s.etiqueta ?? 'Ver servicio'} <Icono nombre="flecha" tam={18} />
+          </span>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+<style>
+  .servicios {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .servicios-destacados {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+  .servicio {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    transition:
+      border-color 0.2s,
+      box-shadow 0.2s,
+      transform 0.2s;
+  }
+  .servicio:hover {
+    border-color: var(--acento);
+    box-shadow: var(--sombra-alta);
+    transform: translateY(-3px);
+  }
+  .servicio h3 {
+    margin: 0;
+    font-size: 1.15rem;
+  }
+  .servicio h3 a {
+    color: var(--texto);
+    text-decoration: none;
+  }
+  .servicio h3 a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+  }
+  .servicio p {
+    margin: 0;
+    color: var(--suave);
+    font-size: 0.98rem;
+  }
+  .servicio-con-foto {
+    padding: 0;
+    overflow: hidden;
+  }
+  .servicio :global(.servicio-foto) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    transition: transform 0.4s;
+  }
+  .servicio-con-foto:hover :global(.servicio-foto) {
+    transform: scale(1.04);
+  }
+  .servicio-cuerpo {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.55rem;
+    padding: 1.25rem 1.35rem 1.35rem;
+  }
+  .servicio-con-foto h3 {
+    font-size: 1.35rem;
+  }
+  .servicio-icono {
+    display: grid;
+    place-items: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--acento-suave), #fff);
+    border: 1px solid var(--borde);
+    color: var(--acento);
+  }
+  .servicio-mas {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: auto;
+    padding-top: 0.25rem;
+    color: var(--acento-osc);
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+</style>

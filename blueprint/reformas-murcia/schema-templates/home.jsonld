@@ -1,0 +1,42 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "GeneralContractor",
+      "@id": "{{dominio}}/#negocio",
+      "name": "{{marca}}",
+      "url": "{{dominio}}/",
+      "telephone": "{{telefono_e164}}",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "{{ciudad}}",
+        "addressRegion": "{{region}}",
+        "addressCountry": "ES"
+      },
+      "areaServed": [
+        { "@type": "City", "name": "{{zona}}" }
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Servicios de reformas",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "{{servicio}}", "url": "{{url_servicio}}" } }
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "{{dominio}}/#web",
+      "url": "{{dominio}}/",
+      "name": "{{marca}}",
+      "inLanguage": "es-ES",
+      "publisher": { "@id": "{{dominio}}/#negocio" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "{{pregunta}}", "acceptedAnswer": { "@type": "Answer", "text": "{{respuesta}}" } }
+      ]
+    }
+  ]
+}

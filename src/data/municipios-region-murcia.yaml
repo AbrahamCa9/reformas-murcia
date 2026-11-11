@@ -1,0 +1,48 @@
+# Los 45 municipios de la Región de Murcia (página /zonas/ y areaServed).
+# Los que tienen página propia se definen en blueprint/.../url-map.yaml (zonas).
+municipios:
+  - { nombre: "Abanilla", slug: abanilla }
+  - { nombre: "Abarán", slug: abaran }
+  - { nombre: "Águilas", slug: aguilas }
+  - { nombre: "Albudeite", slug: albudeite }
+  - { nombre: "Alcantarilla", slug: alcantarilla }
+  - { nombre: "Los Alcázares", slug: los-alcazares }
+  - { nombre: "Aledo", slug: aledo }
+  - { nombre: "Alguazas", slug: alguazas }
+  - { nombre: "Alhama de Murcia", slug: alhama-de-murcia }
+  - { nombre: "Archena", slug: archena }
+  - { nombre: "Beniel", slug: beniel }
+  - { nombre: "Blanca", slug: blanca }
+  - { nombre: "Bullas", slug: bullas }
+  - { nombre: "Calasparra", slug: calasparra }
+  - { nombre: "Campos del Río", slug: campos-del-rio }
+  - { nombre: "Caravaca de la Cruz", slug: caravaca-de-la-cruz }
+  - { nombre: "Cartagena", slug: cartagena }
+  - { nombre: "Cehegín", slug: cehegin }
+  - { nombre: "Ceutí", slug: ceuti }
+  - { nombre: "Cieza", slug: cieza }
+  - { nombre: "Fortuna", slug: fortuna }
+  - { nombre: "Fuente Álamo de Murcia", slug: fuente-alamo-de-murcia }
+  - { nombre: "Jumilla", slug: jumilla }
+  - { nombre: "Librilla", slug: librilla }
+  - { nombre: "Lorca", slug: lorca }
+  - { nombre: "Lorquí", slug: lorqui }
+  - { nombre: "Mazarrón", slug: mazarron }
+  - { nombre: "Molina de Segura", slug: molina-de-segura }
+  - { nombre: "Moratalla", slug: moratalla }
+  - { nombre: "Mula", slug: mula }
+  - { nombre: "Murcia", slug: murcia }
+  - { nombre: "Ojós", slug: ojos }
+  - { nombre: "Pliego", slug: pliego }
+  - { nombre: "Puerto Lumbreras", slug: puerto-lumbreras }
+  - { nombre: "Ricote", slug: ricote }
+  - { nombre: "San Javier", slug: san-javier }
+  - { nombre: "San Pedro del Pinatar", slug: san-pedro-del-pinatar }
+  - { nombre: "Santomera", slug: santomera }
+  - { nombre: "Torre-Pacheco", slug: torre-pacheco }
+  - { nombre: "Las Torres de Cotillas", slug: las-torres-de-cotillas }
+  - { nombre: "Totana", slug: totana }
+  - { nombre: "Ulea", slug: ulea }
+  - { nombre: "La Unión", slug: la-union }
+  - { nombre: "Villanueva del Río Segura", slug: villanueva-del-rio-segura }
+  - { nombre: "Yecla", slug: yecla }

@@ -1,0 +1,29 @@
+# Prueba la conexión con Telegram: te manda un mensaje de prueba.
+# Necesita los secretos TELEGRAM_BOT_TOKEN y TELEGRAM_CHAT_ID
+# (GitHub → Settings → Secrets and variables → Actions) y haberle escrito /start a tu bot.
+# Al subir este archivo se ejecuta una vez sin avisar a nadie, para que GitHub lo registre.
+name: Probar Telegram
+on:
+  workflow_dispatch:
+  push:
+    branches: [borrador]
+    paths: ['.github/workflows/probar-telegram.yml']
+permissions:
+  contents: read
+jobs:
+  probar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+      - name: Mandar mensaje de prueba
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: >-
+          node scripts/avisar-telegram.mjs --obligatorio
+          "✅ Telegram conectado con la web. Aquí te llegarán los presupuestos del formulario,
+          los avisos de publicación y la revisión semanal."

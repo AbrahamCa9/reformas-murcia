@@ -1,0 +1,20 @@
+# Fotos de la web.
+#
+# Cómo añadir una: pon aquí su `archivo` (nombre SEO, sin extensión), la `url` de origen y el `alt`,
+# y haz push a `borrador`. El workflow "Importar fotos" la descarga, la optimiza a WebP y la guarda
+# en src/assets/fotos/{archivo}.webp (también a mano con `npm run fotos`, si hay acceso a la URL).
+#
+# Las fotos de IA son solo de AMBIENTE. Las de "trabajos realizados" tienen que ser reales.
+fotos:
+  - archivo: cocina-reformada-abierta-al-salon
+    origen: IA (fal.ai, fal-ai/z-image/turbo), foto de ambiente
+    url: https://v3b.fal.media/files/b/0ab1e3e2/83hBNcrAXqEjyPYfUddlQ_Z30IE7Yq.png
+    alt: Cocina reformada con muebles blancos y madera, abierta al salón y con luz natural
+  - archivo: bano-reformado-con-plato-de-ducha
+    origen: IA (fal.ai, fal-ai/z-image/turbo), foto de ambiente
+    url: https://v3b.fal.media/files/b/0ab1e3f5/MdGIpv6gqBwiQIOMjbk1z_vLu6aK3q.png
+    alt: Baño reformado con plato de ducha, mampara de cristal y mueble de madera suspendido
+  - archivo: salon-de-piso-reformado
+    origen: IA (fal.ai, fal-ai/z-image/turbo), foto de ambiente
+    url: https://v3b.fal.media/files/b/0ab1e3f5/zNZ9vrbroSfM5LNPVpbsU_eEr2QwSI.png
+    alt: Salón de un piso reformado con suelo de madera, paredes blancas y luz natural

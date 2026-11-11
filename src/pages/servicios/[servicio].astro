@@ -1,0 +1,163 @@
+---
+// SERVICIO PILAR · plantilla blueprint/.../page-templates/service-pillar.md
+// Trabaja "{servicio} en {ciudad}" y reparte enlaces a las páginas del servicio en cada pueblo.
+import type { GetStaticPaths } from 'astro';
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/Hero.astro';
+import Seccion from '../../components/Seccion.astro';
+import RejillaServicios from '../../components/RejillaServicios.astro';
+import ListaEnlaces from '../../components/ListaEnlaces.astro';
+import PorQueNosotros from '../../components/PorQueNosotros.astro';
+import Proceso from '../../components/Proceso.astro';
+import Precio from '../../components/Precio.astro';
+import PreguntasFrecuentes from '../../components/PreguntasFrecuentes.astro';
+import CtaFinal from '../../components/CtaFinal.astro';
+import { negocio } from '../../lib/datos';
+import { foto } from '../../lib/fotos';
+import { servicios, zonas, zonasDeServicio, rutas, type Servicio } from '../../lib/contenido';
+import { seo, enMinuscula } from '../../lib/plantillas';
+import { grafo, servicio as servicioSchema, migas as migasSchema, faq } from '../../lib/schema';
+
+export const getStaticPaths = (async () => {
+  const lista = await servicios();
+  return lista.map((s) => ({ params: { servicio: s.id }, props: { s } }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  s: Servicio;
+}
+const { s } = Astro.props;
+const d = s.data;
+const { Content } = await render(s);
+const ciudad = negocio.ciudad;
+const nombreMin = enMinuscula(d.nombre);
+const p = seo('service-pillar', { servicio: d.nombre, resumen: d.resumen });
+
+const todos = await servicios();
+const relacionados = d.relacionados
+  .map((r) => todos.find((x) => x.id === r.id))
+  .filter((x): x is Servicio => Boolean(x));
+const conPagina = await zonasDeServicio(s.id);
+const todasZonas = await zonas();
+
+const migas = [
+  { nombre: 'Inicio', ruta: rutas.home },
+  { nombre: 'Servicios', ruta: rutas.servicios },
+  { nombre: d.nombre, ruta: rutas.servicio(s.id) },
+];
+const mensajeWa = `Hola, quiero pedir presupuesto para ${nombreMin} en ${ciudad}.`;
+const puntos = negocio.garantias.slice(0, 3).map((g) => g.titulo);
+const schema = grafo([
+  servicioSchema({ nombre: d.nombre, tipo: d.nombre, descripcion: d.resumen, ruta: rutas.servicio(s.id) }),
+  migasSchema(migas),
+  faq(d.faqs),
+]);
+
+const enlacesZonas = conPagina.length
+  ? conPagina.map((z) => ({ texto: `${d.nombre} en ${z.data.nombre}`, href: rutas.landing(s.id, z.id) }))
+  : todasZonas.map((z) => ({ texto: `Reformas en ${z.data.nombre}`, href: rutas.zona(z.id) }));
+---
+
+<Base
+  title={p.title}
+  description={p.description}
+  ruta={rutas.servicio(s.id)}
+  schema={schema}
+  tipo="service-pillar"
+  mensajeWa={mensajeWa}
+  noindex={d.pendiente}
+>
+  {
+    p.secciones.map((sec, i) => {
+      const alt = i % 2 === 1;
+      switch (sec) {
+        case 'hero':
+          return <Hero h1={p.h1} texto={d.resumen} migas={migas} puntos={puntos} mensajeWa={mensajeWa} foto={foto(d.foto)} />;
+        case 'contenido':
+          return (
+            <Seccion id="contenido" alt={alt}>
+              <div class="prosa">
+                <Content />
+              </div>
+            </Seccion>
+          );
+        case 'variantes':
+          return (
+            <Seccion id="variantes" titulo={d.titulo_variantes} alt={alt}>
+              <ul class="rejilla variantes">
+                {d.variantes.map((v) => (
+                  <li class="tarjeta">
+                    <h3>{v.titulo}</h3>
+                    <p>{v.texto}</p>
+                  </li>
+                ))}
+              </ul>
+            </Seccion>
+          );
+        case 'zonas-del-servicio':
+          return (
+            <ListaEnlaces
+              id="zonas-del-servicio"
+              titulo={conPagina.length ? `${d.nombre} en otros pueblos de la región` : 'También en los pueblos de la región'}
+              intro={
+                conPagina.length
+                  ? `Además de en ${ciudad}, tenemos información local de ${nombreMin} en estos pueblos:`
+                  : `Además de en ${ciudad}, trabajamos en estos pueblos:`
+              }
+              enlaces={enlacesZonas}
+              nota={`¿Tu pueblo no aparece? Trabajamos en toda la ${negocio.region}: pregúntanos sin compromiso.`}
+              alt={alt}
+            />
+          );
+        case 'por-que-nosotros':
+          return <PorQueNosotros alt={alt} />;
+        case 'proceso':
+          return <Proceso ayuntamiento={`el Ayuntamiento de ${ciudad}`} alt={alt} />;
+        case 'precio':
+          return (
+            <Precio
+              titulo={d.titulo_precio.replaceAll('{zona}', ciudad)}
+              factores={d.factores_precio}
+              precio={d.precio_orientativo}
+              alt={alt}
+            />
+          );
+        case 'faq':
+          return <PreguntasFrecuentes titulo={`Preguntas frecuentes sobre ${nombreMin}`} preguntas={d.faqs} alt={alt} />;
+        case 'relacionados':
+          return (
+            <Seccion id="relacionados" titulo="Servicios relacionados" alt={alt}>
+              <RejillaServicios
+                items={relacionados.map((r) => ({
+                  nombre: r.data.nombre,
+                  resumen: r.data.resumen,
+                  icono: r.data.icono,
+                  href: rutas.servicio(r.id),
+                }))}
+              />
+            </Seccion>
+          );
+        case 'cta-final':
+          return <CtaFinal servicio={d.nombre} mensajeWa={mensajeWa} alt={alt} />;
+        default:
+          throw new Error(`La plantilla service-pillar pide la sección "${sec}", que no existe en esta página`);
+      }
+    })
+  }
+</Base>
+
+<style>
+  .variantes {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .variantes h3 {
+    margin-bottom: 0.4rem;
+  }
+  .variantes p {
+    margin: 0;
+    color: var(--suave);
+  }
+</style>

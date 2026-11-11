@@ -1,0 +1,76 @@
+---
+// Bloque de enlaces internos (otras zonas, otros servicios, pueblos cercanos...).
+// El texto del enlace describe el destino: "Reforma de baños en Ceutí", nunca "clic aquí".
+import Seccion from './Seccion.astro';
+import Icono from './Icono.astro';
+import type { Enlace } from '../lib/tipos';
+interface Props {
+  id: string;
+  titulo: string;
+  intro?: string;
+  enlaces: Enlace[];
+  nota?: string;
+  alt?: boolean;
+}
+const { id, titulo, intro, enlaces, nota, alt } = Astro.props;
+---
+
+<Seccion id={id} titulo={titulo} intro={intro} alt={alt}>
+  <ul class="enlaces">
+    {
+      enlaces.map((e) => (
+        <li>
+          <a href={e.href}>
+            <span>
+              <strong>{e.texto}</strong>
+              {e.detalle && <small>{e.detalle}</small>}
+            </span>
+            <Icono nombre="flecha" tam={18} />
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  {nota && <p class="nota">{nota}</p>}
+</Seccion>
+
+<style>
+  .enlaces {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .enlaces a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    min-height: 3.5rem;
+    height: 100%;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+    background: var(--fondo);
+    color: var(--texto);
+    text-decoration: none;
+  }
+  .enlaces a:hover {
+    border-color: var(--acento);
+    color: var(--acento-osc);
+  }
+  .enlaces span {
+    display: flex;
+    flex-direction: column;
+  }
+  .enlaces small {
+    color: var(--suave);
+    font-size: 0.9rem;
+  }
+  .nota {
+    margin: 1.25rem 0 0;
+    color: var(--suave);
+  }
+</style>

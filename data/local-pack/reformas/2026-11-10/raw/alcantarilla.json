@@ -1,0 +1,98 @@
+{
+ "consulta": "empresa de reformas en Alcantarilla Murcia",
+ "fuente": "Google Maps · Places API (búsqueda de texto) vía conector SEO Personal",
+ "fecha": "2026-11-10",
+ "nota": "La posición es la de la búsqueda de Places, que se aproxima al Local Pack pero no es idéntica.",
+ "resultados": [
+  {
+   "posicion": 1,
+   "nombre": "CONCAMAR - Reformas integrales",
+   "categoria": "Servicios",
+   "valoracion": 4.6,
+   "resenas": 73,
+   "web": "https://www.concamar.com/empresa-de-reformas-en-murcia/",
+   "localidad": "Alcantarilla"
+  },
+  {
+   "posicion": 2,
+   "nombre": "Reformas Martínez",
+   "categoria": "Servicios",
+   "valoracion": 5.0,
+   "resenas": 67,
+   "web": "http://reformasmartinez.com/",
+   "localidad": "Alcantarilla"
+  },
+  {
+   "posicion": 3,
+   "nombre": "TH Reformas y construcción",
+   "categoria": "Servicios",
+   "valoracion": 5.0,
+   "resenas": 19,
+   "web": "http://www.threformas.es/",
+   "localidad": "Alcantarilla"
+  },
+  {
+   "posicion": 4,
+   "nombre": "Estructura AZ",
+   "categoria": "Servicios",
+   "valoracion": 5.0,
+   "resenas": 12,
+   "web": "https://www.estructuraaz.es/",
+   "localidad": "Alcantarilla"
+  },
+  {
+   "posicion": 5,
+   "nombre": "Reformas Jofra",
+   "categoria": "Servicios",
+   "valoracion": 5.0,
+   "resenas": 5,
+   "web": "https://www.reformasjofra.es/",
+   "localidad": "Alcantarilla"
+  },
+  {
+   "posicion": 6,
+   "nombre": "Reformas Plumbing Tecnology",
+   "categoria": "Servicios",
+   "valoracion": 4.0,
+   "resenas": 18,
+   "web": "http://www.plumbingtecnology.es/",
+   "localidad": "Alcantarilla"
+  },
+  {
+   "posicion": 7,
+   "nombre": "Prolyco",
+   "categoria": "Servicios",
+   "valoracion": 4.0,
+   "resenas": 17,
+   "web": "http://www.prolyco.com/",
+   "localidad": "Murcia"
+  },
+  {
+   "posicion": 8,
+   "nombre": "Reformas y servicios JARB",
+   "categoria": "Servicios",
+   "valoracion": 5.0,
+   "resenas": 4,
+   "web": "(solo Facebook)",
+   "localidad": "Alcantarilla"
+  },
+  {
+   "posicion": 9,
+   "nombre": "Proyco Alcantarilla S.L.",
+   "categoria": "Servicios",
+   "valoracion": 3.7,
+   "resenas": 26,
+   "web": "http://www.proycoalcantarilla.com/",
+   "localidad": "Alcantarilla"
+  },
+  {
+   "posicion": 10,
+   "nombre": "Proa Arquitectura",
+   "categoria": "Servicios",
+   "valoracion": 5.0,
+   "resenas": 20,
+   "web": "http://www.proaarquitectura.es/",
+   "localidad": "Alcantarilla"
+  }
+ ]
+}

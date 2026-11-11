@@ -1,0 +1,280 @@
+---
+// Cabecera: logo, menú (desplegable de servicios sin JavaScript) y teléfono siempre visible.
+import Icono from './Icono.astro';
+import { negocio, contacto } from '../lib/datos';
+import { servicios, rutas } from '../lib/contenido';
+
+interface Props {
+  ruta: string;
+}
+const { ruta } = Astro.props;
+const lista = await servicios();
+const actual = (r: string) => (ruta === r ? 'page' : undefined);
+const paginas = [
+  { texto: 'Zonas', href: rutas.zonas },
+  { texto: 'Sobre nosotros', href: rutas.sobreNosotros },
+  { texto: 'Contacto', href: rutas.contacto },
+];
+---
+
+<header class="cabecera">
+  <div class="contenedor fila">
+    <a class="logo" href={rutas.home}>
+      <span class="logo-icono"><Icono nombre="casa" tam={22} /></span>
+      <span class="logo-texto">
+        <strong>{negocio.marca}</strong>
+        <small>Reformas en {negocio.ciudad} y región</small>
+      </span>
+    </a>
+
+    <nav class="nav-escritorio" aria-label="Principal">
+      <ul class="nav-lista">
+        <li class="con-sub">
+          <a href={rutas.servicios} aria-current={actual(rutas.servicios)} class:list={{ activo: ruta.startsWith(rutas.servicios) }}>
+            Servicios <Icono nombre="chevron" tam={16} />
+          </a>
+          <ul class="sub">
+            {
+              lista.map((s) => (
+                <li>
+                  <a href={rutas.servicio(s.id)} aria-current={actual(rutas.servicio(s.id))}>
+                    {s.data.nombre_corto ?? s.data.nombre}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </li>
+        {
+          paginas.map((p) => (
+            <li>
+              <a href={p.href} aria-current={actual(p.href)} class:list={{ activo: ruta.startsWith(p.href) }}>
+                {p.texto}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <a class="btn btn-acento tel" href={contacto.telefonoHref} aria-label={`Llamar al ${contacto.telefonoVisible}`}>
+      <Icono nombre="telefono" tam={20} /><span class="tel-texto">{contacto.telefonoVisible}</span>
+    </a>
+
+    <details class="nav-movil">
+      <summary aria-label="Menú"><Icono nombre="menu" tam={22} /><span class="menu-texto">Menú</span></summary>
+      <nav class="panel" aria-label="Menú">
+        <p class="panel-titulo">Servicios</p>
+        <ul class="panel-servicios">
+          {
+            lista.map((s) => (
+              <li>
+                <a href={rutas.servicio(s.id)}>{s.data.nombre_corto ?? s.data.nombre}</a>
+              </li>
+            ))
+          }
+        </ul>
+        <ul class="panel-paginas">
+          <li><a href={rutas.servicios}>Todos los servicios</a></li>
+          {
+            paginas.map((p) => (
+              <li>
+                <a href={p.href}>{p.texto}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<style>
+  .cabecera {
+    position: relative;
+    z-index: 20;
+    background: var(--fondo);
+    border-bottom: 1px solid var(--borde);
+  }
+  .fila {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 4.25rem;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-right: auto;
+    color: var(--texto);
+    text-decoration: none;
+  }
+  .logo-icono {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 10px;
+    background: var(--acento);
+    color: #fff;
+  }
+  .logo-texto {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+  }
+  .logo-texto strong {
+    font-family: var(--fuente-titulos);
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .logo-texto small {
+    color: var(--suave);
+    font-size: 0.78rem;
+  }
+  .tel {
+    min-height: 44px;
+    padding: 0.55rem 0.8rem;
+  }
+  .tel-texto,
+  .nav-escritorio {
+    display: none;
+  }
+
+  /* Menú móvil */
+  .nav-movil summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    min-height: 44px;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+    font-weight: 700;
+    list-style: none;
+    cursor: pointer;
+  }
+  .nav-movil summary::-webkit-details-marker {
+    display: none;
+  }
+  .logo-texto strong {
+    white-space: nowrap;
+  }
+  @media (max-width: 29.99rem) {
+    .menu-texto {
+      display: none;
+    }
+  }
+  .nav-movil[open] summary {
+    background: var(--fondo-alt);
+  }
+  .panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: calc(100dvh - 4.25rem);
+    overflow-y: auto;
+    padding: 1rem;
+    background: var(--fondo);
+    border-bottom: 1px solid var(--borde);
+    box-shadow: var(--sombra);
+  }
+  .panel ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .panel-titulo {
+    margin: 0 0 0.25rem;
+    color: var(--suave);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .panel-servicios {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr));
+    column-gap: 1rem;
+    padding-bottom: 0.75rem !important;
+    border-bottom: 1px solid var(--borde);
+  }
+  .panel a {
+    display: block;
+    padding: 0.55rem 0;
+    color: var(--texto);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .panel-paginas a {
+    font-weight: 700;
+  }
+
+  @media (min-width: 64rem) {
+    .nav-movil {
+      display: none;
+    }
+    .nav-escritorio,
+    .tel-texto {
+      display: block;
+    }
+    .tel-texto {
+      display: inline;
+    }
+    .nav-lista {
+      display: flex;
+      gap: 0.15rem;
+      list-style: none;
+      margin: 0 0.5rem 0 0;
+      padding: 0;
+    }
+    .nav-lista a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+      padding: 0.6rem 0.8rem;
+      border-radius: 8px;
+      color: var(--texto);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .nav-lista a:hover,
+    .nav-lista a.activo,
+    .nav-lista a[aria-current] {
+      background: var(--fondo-alt);
+      color: var(--acento-osc);
+    }
+    .con-sub {
+      position: relative;
+    }
+    .sub {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 36rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.1rem 0.5rem;
+      margin: 0;
+      padding: 0.75rem;
+      list-style: none;
+      background: var(--fondo);
+      border: 1px solid var(--borde);
+      border-radius: var(--radio);
+      box-shadow: var(--sombra);
+    }
+    .con-sub:hover .sub,
+    .con-sub:focus-within .sub {
+      display: grid;
+    }
+    .sub a {
+      display: block;
+      padding: 0.5rem 0.6rem;
+      font-weight: 500;
+    }
+  }
+</style>

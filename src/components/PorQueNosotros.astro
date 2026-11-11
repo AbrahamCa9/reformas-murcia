@@ -1,0 +1,74 @@
+---
+// "Por qué elegirnos": solo garantías y datos reales de src/data/negocio.yaml.
+import Seccion from './Seccion.astro';
+import Icono from './Icono.astro';
+import { negocio } from '../lib/datos';
+
+interface Props {
+  titulo?: string;
+  intro?: string;
+  alt?: boolean;
+}
+const { titulo = `Por qué elegir ${negocio.marca}`, intro, alt } = Astro.props;
+const iconos = ['documento', 'usuario', 'escudo', 'limpio'];
+const extra = [
+  ...(negocio.anios_experiencia ? [`${negocio.anios_experiencia} años haciendo reformas`] : []),
+  ...negocio.certificaciones,
+];
+---
+
+<Seccion id="por-que-nosotros" titulo={titulo} intro={intro} alt={alt}>
+  <ul class="rejilla garantias">
+    {
+      negocio.garantias.map((g, i) => (
+        <li class="tarjeta">
+          <span class="garantia-icono">
+            <Icono nombre={g.icono ?? iconos[i] ?? 'check'} />
+          </span>
+          <h3>{g.titulo}</h3>
+          <p>{g.texto}</p>
+        </li>
+      ))
+    }
+  </ul>
+  {
+    extra.length > 0 && (
+      <ul class="checks extra">
+        {extra.map((e) => (
+          <li>
+            <Icono nombre="check" tam={20} />
+            <span>{e}</span>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</Seccion>
+
+<style>
+  .garantias {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .garantias h3 {
+    margin: 0.75rem 0 0.35rem;
+    font-size: 1.1rem;
+  }
+  .garantias p {
+    margin: 0;
+    color: var(--suave);
+  }
+  .garantia-icono {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    background: var(--acento-suave);
+    color: var(--acento);
+  }
+  .extra {
+    margin-top: 1.5rem;
+  }
+</style>

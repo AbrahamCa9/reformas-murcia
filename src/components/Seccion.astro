@@ -1,0 +1,27 @@
+---
+// Envoltorio de sección: id para anclas y para el QA, fondo alterno y cabecera opcional.
+interface Props {
+  id: string;
+  titulo?: string;
+  intro?: string;
+  alt?: boolean;
+  /** id del encabezado si la sección pinta su propio <h2>. */
+  tituloId?: string;
+}
+const { id, titulo, intro, alt = false, tituloId } = Astro.props;
+const etiqueta = titulo ? `${id}-titulo` : tituloId;
+---
+
+<section id={id} class:list={['seccion', { 'seccion-alt': alt }]} aria-labelledby={etiqueta} data-seccion={id}>
+  <div class="contenedor">
+    {
+      titulo && (
+        <div class="seccion-cabecera">
+          <h2 id={`${id}-titulo`}>{titulo}</h2>
+          {intro && <p>{intro}</p>}
+        </div>
+      )
+    }
+    <slot />
+  </div>
+</section>

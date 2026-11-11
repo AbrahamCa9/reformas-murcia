@@ -1,0 +1,28 @@
+---
+import Base from '../../layouts/Base.astro';
+import Seccion from '../../components/Seccion.astro';
+import Icono from '../../components/Icono.astro';
+import { negocio, contacto } from '../../lib/datos';
+import { rutas } from '../../lib/contenido';
+---
+
+<Base
+  title={`Solicitud recibida | ${negocio.marca}`}
+  description="Hemos recibido tu solicitud de presupuesto."
+  ruta="/contacto/gracias/"
+  noindex
+  conFormulario={false}
+  tipo="noindex"
+>
+  <Seccion id="gracias">
+    <div class="prosa">
+      <h1>¡Gracias! Hemos recibido tu solicitud</h1>
+      <p>Te llamaremos lo antes posible para concretar la visita. Si es urgente, llámanos o escríbenos por WhatsApp.</p>
+      <div class="botones">
+        <a class="btn btn-acento" href={contacto.telefonoHref}><Icono nombre="telefono" tam={20} /> {contacto.telefonoVisible}</a>
+        {contacto.whatsappHref && <a class="btn btn-wa" href={contacto.whatsappHref} target="_blank" rel="noopener"><Icono nombre="whatsapp" tam={20} /> WhatsApp</a>}
+      </div>
+      <p><a href={rutas.servicios}>Ver todos los servicios</a> · <a href={rutas.home}>Volver al inicio</a></p>
+    </div>
+  </Seccion>
+</Base>

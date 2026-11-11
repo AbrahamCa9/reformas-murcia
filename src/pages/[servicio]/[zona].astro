@@ -1,0 +1,170 @@
+---
+// SERVICIO × PUEBLO · plantilla blueprint/.../page-templates/service-area.md
+// El corazón del SEO local: "{servicio} en {zona}" con texto propio de la combinación.
+import type { GetStaticPaths } from 'astro';
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/Hero.astro';
+import Seccion from '../../components/Seccion.astro';
+import ListaEnlaces from '../../components/ListaEnlaces.astro';
+import PorQueNosotros from '../../components/PorQueNosotros.astro';
+import Proceso from '../../components/Proceso.astro';
+import Precio from '../../components/Precio.astro';
+import PreguntasFrecuentes from '../../components/PreguntasFrecuentes.astro';
+import CtaFinal from '../../components/CtaFinal.astro';
+import { negocio, pares, plantillas } from '../../lib/datos';
+import { foto } from '../../lib/fotos';
+import {
+  servicios,
+  zonas,
+  landing,
+  zonasDeServicio,
+  serviciosDeZona,
+  rutas,
+  type Servicio,
+  type Zona,
+  type Landing,
+} from '../../lib/contenido';
+import { seo, enMinuscula } from '../../lib/plantillas';
+import { grafo, servicio as servicioSchema, migas as migasSchema, faq } from '../../lib/schema';
+
+export const getStaticPaths = (async () => {
+  const ss = await servicios();
+  const zs = await zonas();
+  return Promise.all(
+    pares.map(async ({ servicio, zona }) => ({
+      params: { servicio, zona },
+      props: {
+        s: ss.find((x) => x.id === servicio)!,
+        z: zs.find((x) => x.id === zona)!,
+        l: await landing(servicio, zona),
+      },
+    })),
+  );
+}) satisfies GetStaticPaths;
+
+interface Props {
+  s: Servicio;
+  z: Zona;
+  l: Landing;
+}
+const { s, z, l } = Astro.props;
+const { Content } = await render(l);
+const zona = z.data.nombre;
+const nombre = s.data.nombre;
+const nombreMin = enMinuscula(nombre);
+const p = seo('service-area', { servicio: nombre, zona, gancho: l.data.gancho });
+
+// FAQ: las locales de la combinación + las del servicio hasta llegar al mínimo (al menos 2 generales)
+const faqMin = plantillas['service-area'].faq_min;
+const generales = Math.max(faqMin - l.data.faqs_locales.length, 2);
+const preguntas = [...l.data.faqs_locales, ...s.data.faqs.slice(0, generales)];
+
+// Enlazado (blueprint/.../internal-linking.yaml)
+const hermanas = (await zonasDeServicio(s.id)).filter((x) => x.id !== z.id);
+const otrosAqui = (await serviciosDeZona(z.id)).filter((x) => x.id !== s.id);
+const todos = await servicios();
+const relacionados = s.data.relacionados
+  .map((r) => todos.find((x) => x.id === r.id))
+  .filter((x): x is Servicio => Boolean(x) && !otrosAqui.some((o) => o.id === x!.id));
+
+const enlacesOtrasZonas = [
+  ...hermanas.map((h) => ({ texto: `${nombre} en ${h.data.nombre}`, href: rutas.landing(s.id, h.id) })),
+  { texto: `${nombre} en ${negocio.ciudad}`, href: rutas.servicio(s.id), detalle: 'Ciudad de Murcia y pedanías' },
+];
+const enlacesOtrosServicios = [
+  ...otrosAqui.map((o) => ({ texto: `${o.data.nombre} en ${zona}`, href: rutas.landing(o.id, z.id) })),
+  ...(otrosAqui.length < 2 ? relacionados.slice(0, 2 - otrosAqui.length) : []).map((r) => ({
+    texto: r.data.nombre,
+    href: rutas.servicio(r.id),
+  })),
+  { texto: `Todas nuestras reformas en ${zona}`, href: rutas.zona(z.id), detalle: 'Servicios, viviendas y trámites del pueblo' },
+];
+
+const ruta = rutas.landing(s.id, z.id);
+const migas = [
+  { nombre: 'Inicio', ruta: rutas.home },
+  { nombre: nombre, ruta: rutas.servicio(s.id) },
+  { nombre: zona, ruta },
+];
+const mensajeWa = `Hola, quiero pedir presupuesto para ${nombreMin} en ${zona}.`;
+const puntos = negocio.garantias.slice(0, 3).map((g) => g.titulo);
+const schema = grafo([
+  servicioSchema({ nombre: `${nombre} en ${zona}`, tipo: nombre, descripcion: l.data.gancho, ruta, zona }),
+  migasSchema(migas),
+  faq(preguntas),
+]);
+---
+
+<Base
+  title={p.title}
+  description={p.description}
+  ruta={ruta}
+  schema={schema}
+  tipo="service-area"
+  mensajeWa={mensajeWa}
+  noindex={l.data.pendiente}
+>
+  {
+    p.secciones.map((sec, i) => {
+      const alt = i % 2 === 1;
+      switch (sec) {
+        case 'hero':
+          return <Hero h1={p.h1} texto={l.data.gancho} migas={migas} puntos={puntos} mensajeWa={mensajeWa} foto={foto(s.data.foto)} />;
+        case 'contenido-local':
+          return (
+            <Seccion id="contenido-local" alt={alt}>
+              <div class="prosa">
+                <Content />
+              </div>
+            </Seccion>
+          );
+        case 'por-que-nosotros':
+          return <PorQueNosotros alt={alt} />;
+        case 'proceso':
+          return (
+            <Proceso
+              titulo={`Cómo trabajamos en ${zona}`}
+              ayuntamiento={`el ${z.data.ayuntamiento}`}
+              alt={alt}
+            />
+          );
+        case 'precio':
+          return (
+            <Precio
+              titulo={s.data.titulo_precio.replaceAll('{zona}', zona)}
+              factores={s.data.factores_precio}
+              precio={s.data.precio_orientativo}
+              alt={alt}
+            />
+          );
+        case 'faq':
+          return <PreguntasFrecuentes titulo={`Preguntas frecuentes: ${nombreMin} en ${zona}`} preguntas={preguntas} alt={alt} />;
+        case 'otras-zonas':
+          return (
+            <ListaEnlaces
+              id="otras-zonas"
+              titulo={`${nombre} en otros pueblos`}
+              enlaces={enlacesOtrasZonas}
+              nota={`Trabajamos en toda la ${negocio.region}. Si tu pueblo no aparece, pregúntanos.`}
+              alt={alt}
+            />
+          );
+        case 'otros-servicios-zona':
+          return <ListaEnlaces id="otros-servicios-zona" titulo={`Más reformas en ${zona}`} enlaces={enlacesOtrosServicios} alt={alt} />;
+        case 'cta-final':
+          return (
+            <CtaFinal
+              titulo={`Presupuesto gratis para ${nombreMin} en ${zona}`}
+              servicio={nombre}
+              zona={zona}
+              mensajeWa={mensajeWa}
+              alt={alt}
+            />
+          );
+        default:
+          throw new Error(`La plantilla service-area pide la sección "${sec}", que no existe en esta página`);
+      }
+    })
+  }
+</Base>

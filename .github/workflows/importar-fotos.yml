@@ -1,0 +1,41 @@
+# Descarga y optimiza las fotos nuevas de data/fotos.yaml y las guarda en la misma rama.
+# Existe porque el entorno de Claude no puede descargar de fal.ai; GitHub sí.
+name: Importar fotos
+
+on:
+  push:
+    branches: [borrador]
+    paths: ['data/fotos.yaml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: importar-fotos-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  importar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci
+      - run: npm run fotos
+      - name: Guardar las fotos nuevas en la rama
+        run: |
+          git add src/assets/fotos
+          if git diff --cached --quiet; then
+            echo "No hay fotos nuevas."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Fotos importadas desde data/fotos.yaml"
+          git push

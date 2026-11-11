@@ -1,0 +1,39 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { negocio, contacto } from '../lib/datos';
+import { rutas } from '../lib/contenido';
+const { legal } = negocio;
+const web = negocio.dominio.replace(/^https?:\/\//, '');
+---
+
+<Legal titulo="Aviso legal" descripcion={`Aviso legal de ${web}: titular, condiciones de uso y responsabilidad.`} ruta={rutas.avisoLegal}>
+  <h2>Datos del titular</h2>
+  <p>
+    En cumplimiento del artículo 10 de la Ley 34/2002, de servicios de la sociedad de la información y de comercio
+    electrónico (LSSI-CE), estos son los datos del titular de {web}:
+  </p>
+  <ul>
+    <li>Titular: {legal.titular}</li>
+    <li>NIF: {legal.nif}</li>
+    <li>Domicilio: {legal.domicilio}</li>
+    <li>Teléfono: {contacto.telefonoVisible}</li>
+    <li>Email: {contacto.email}</li>
+  </ul>
+  <h2>Uso de la web</h2>
+  <p>
+    Esta web informa sobre los servicios de reformas de {negocio.marca} y permite pedir presupuesto. Quien la visita se
+    compromete a usarla de forma lícita y a no dañar su funcionamiento.
+  </p>
+  <h2>Propiedad intelectual</h2>
+  <p>
+    Los textos, el diseño y el código de esta web pertenecen a su titular o se usan con permiso. No se pueden copiar ni
+    distribuir sin autorización.
+  </p>
+  <h2>Responsabilidad</h2>
+  <p>
+    La información de la web es orientativa. Las condiciones de cada obra son las que figuran en su presupuesto por escrito.
+    El titular no responde de los contenidos de webs de terceros enlazadas desde aquí.
+  </p>
+  <h2>Ley aplicable</h2>
+  <p>Este aviso se rige por la ley española.</p>
+</Legal>

@@ -1,0 +1,73 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/Hero.astro';
+import Seccion from '../../components/Seccion.astro';
+import Icono from '../../components/Icono.astro';
+import CtaFinal from '../../components/CtaFinal.astro';
+import { negocio, contacto } from '../../lib/datos';
+import { pagina, servicios, rutas } from '../../lib/contenido';
+import { grafo, migas as migasSchema, negocioCompleto } from '../../lib/schema';
+
+const p = await pagina('contacto');
+const { Content } = await render(p);
+const lista = await servicios();
+const migas = [
+  { nombre: 'Inicio', ruta: rutas.home },
+  { nombre: 'Contacto', ruta: rutas.contacto },
+];
+const dias: Record<string, string> = { Mo: 'lunes', Tu: 'martes', We: 'miércoles', Th: 'jueves', Fr: 'viernes', Sa: 'sábado', Su: 'domingo' };
+const horario = negocio.horario.map((h) => `${h.dias.map((d) => dias[d]).join(', ')}: de ${h.abre} a ${h.cierra}`);
+const mensajeWa = 'Hola, quiero pedir presupuesto para una reforma.';
+const schema = grafo([negocioCompleto(lista.map((s) => ({ nombre: s.data.nombre, ruta: rutas.servicio(s.id) }))), migasSchema(migas)]);
+---
+
+<Base
+  title={`Contacto y presupuesto gratis | ${negocio.marca}`}
+  description={`Pide presupuesto gratis para tu reforma en ${negocio.ciudad} y alrededores. Llámanos o escríbenos por WhatsApp al ${contacto.telefonoVisible}, o rellena el formulario.`}
+  ruta={rutas.contacto}
+  schema={schema}
+  tipo="contacto"
+  mensajeWa={mensajeWa}
+>
+  <Hero h1="Contacto y presupuesto gratis" texto={p.data.intro} migas={migas} mensajeWa={mensajeWa} />
+  <p class="contenedor aviso-error" data-error hidden></p>
+  <Seccion id="datos" titulo="Datos de contacto" alt>
+    <ul class="rejilla datos">
+      <li class="tarjeta"><Icono nombre="telefono" /><h3>Teléfono</h3><a href={contacto.telefonoHref}>{contacto.telefonoVisible}</a></li>
+      {contacto.whatsappHref && (
+        <li class="tarjeta"><Icono nombre="whatsapp" /><h3>WhatsApp</h3><a href={contacto.whatsappHref} target="_blank" rel="noopener">Escríbenos por WhatsApp</a></li>
+      )}
+      <li class="tarjeta"><Icono nombre="email" /><h3>Email</h3><a href={`mailto:${contacto.email}`}>{contacto.email}</a></li>
+      <li class="tarjeta"><Icono nombre="mapa" /><h3>Zona de trabajo</h3><p>{negocio.ciudad} y pueblos de la {negocio.region}</p></li>
+      {horario.length > 0 && (
+        <li class="tarjeta"><Icono nombre="reloj" /><h3>Horario</h3>{horario.map((h) => <p>{h}</p>)}</li>
+      )}
+    </ul>
+    <div class="prosa contacto-texto"><Content /></div>
+  </Seccion>
+  <CtaFinal mensajeWa={mensajeWa} />
+</Base>
+
+<script is:inline>
+  (() => {
+    const e = new URLSearchParams(location.search).get('error');
+    if (!e) return;
+    const textos = {
+      datos: 'Revisa los datos: falta el nombre, el teléfono no es válido o no has aceptado la política de privacidad.',
+      envio: 'No hemos podido enviar tu solicitud. Llámanos o escríbenos por WhatsApp y te atendemos enseguida.',
+      limite: 'Has enviado varias solicitudes seguidas. Si es urgente, llámanos o escríbenos por WhatsApp.',
+    };
+    const el = document.querySelector('[data-error]');
+    el.textContent = textos[e] || textos.envio;
+    el.hidden = false;
+  })();
+</script>
+
+<style>
+  .datos { margin: 0 0 2rem; padding: 0; list-style: none; }
+  .datos :global(svg) { color: var(--acento); }
+  .datos h3 { margin: 0.6rem 0 0.2rem; }
+  .datos p { margin: 0; color: var(--suave); }
+  .aviso-error { margin-block: 1.25rem; padding: 0.9rem 1rem; border-radius: 10px; background: #fee2e2; color: #7f1d1d; font-weight: 600; }
+</style>

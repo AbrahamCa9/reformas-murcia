@@ -1,0 +1,59 @@
+---
+// Iconos SVG en línea (cero peticiones extra). Trazos propios en una rejilla de 24×24.
+// Para añadir uno: nuevo nombre en `trazos` y, si es de servicio, en `iconos` de src/content.config.ts.
+interface Props {
+  nombre: string;
+  tam?: number;
+  clase?: string;
+}
+const { nombre, tam = 24, clase } = Astro.props;
+
+const trazos: Record<string, string> = {
+  // Servicios
+  casa: '<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v11h14V9"/><path d="M10 20v-6h4v6"/>',
+  bano: '<path d="M3 12h18v2a6 6 0 0 1-6 6H9a6 6 0 0 1-6-6v-2Z"/><path d="M6 12V6a2 2 0 0 1 4 0"/><path d="m8 20-1 2M16 20l1 2"/>',
+  ducha: '<path d="M5 21V8a5 5 0 0 1 10 0"/><path d="M11 8h8"/><path d="M12 12v.5M15 12v.5M18 12v.5M13.5 15.5v.5M16.5 15.5v.5M15 19v.5"/>',
+  cocina: '<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M4 9h16"/><path d="M8 6h.01M12 6h.01"/><rect x="8" y="12" width="8" height="6" rx="1"/>',
+  fachada: '<path d="M4 21V6l8-3 8 3v15"/><path d="M2 21h20"/><path d="M8 9h2M14 9h2M8 13h2M14 13h2"/><path d="M10 21v-4h4v4"/>',
+  rayo: '<path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/>',
+  gota: '<path d="M12 3s6 6.4 6 11a6 6 0 0 1-12 0c0-4.6 6-11 6-11Z"/>',
+  garaje: '<path d="M3 21V9l9-6 9 6v12"/><path d="M7 21v-9h10v9"/><path d="M7 15h10M7 18h10"/>',
+  local: '<path d="M4 4h16l1 5H3l1-5Z"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/><path d="M5 12v9h14v-9"/><path d="M10 21v-5h4v5"/>',
+  rodillo: '<rect x="3" y="3" width="15" height="6" rx="1.5"/><path d="M18 6h2.5v5H11v4"/><rect x="9.5" y="15" width="3" height="7" rx="1"/>',
+  pladur: '<rect x="3" y="3" width="18" height="18" rx="1.5"/><path d="M3 9h18M3 15h18M9 3v6M15 9v6M9 15v6"/>',
+  tejado: '<path d="M2 12 12 4l10 8"/><path d="M5 10v10h14V10"/><path d="M9 15.5c1 .9 2 .9 3 0s2-.9 3 0"/>',
+  // Interfaz
+  telefono: '<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/>',
+  whatsapp: '<path d="m4 20 1.3-3.9a8.5 8.5 0 1 1 3.2 3L4 20Z"/><path d="M9 9.5c0 2.8 2.7 5.5 5.5 5.5l1-1.5-2-1-1 .8a4.6 4.6 0 0 1-2.3-2.3l.8-1-1-2L9 9.5Z"/>',
+  documento: '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
+  check: '<path d="m5 12.5 4.5 4.5L19 7.5"/>',
+  flecha: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+  chevron: '<path d="m6 9 6 6 6-6"/>',
+  menu: '<path d="M4 6h16M4 12h16M4 18h16"/>',
+  mapa: '<path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/>',
+  email: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
+  escudo: '<path d="M12 3 5 6v5c0 4.5 3 8.5 7 10 4-1.5 7-5.5 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/>',
+  usuario: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+  reloj: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  estrella: '<path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2-5.5-2.9-5.5 2.9 1-6.2L3 9.6l6.2-.9L12 3Z"/>',
+  limpio: '<path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"/><path d="m19 15 .8 2.2 2.2.8-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z"/>',
+};
+
+const d = trazos[nombre];
+if (!d) throw new Error(`Icono desconocido: "${nombre}". Añádelo en src/components/Icono.astro`);
+---
+
+<svg
+  class:list={['icono', clase]}
+  width={tam}
+  height={tam}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+  set:html={d}
+/>

@@ -1,0 +1,134 @@
+---
+// HUB DE PUEBLO · plantilla blueprint/.../page-templates/area-hub.md
+// Trabaja "empresa de reformas en {zona}" y enlaza todas las páginas de servicio del pueblo.
+import type { GetStaticPaths } from 'astro';
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/Hero.astro';
+import Seccion from '../../components/Seccion.astro';
+import RejillaServicios from '../../components/RejillaServicios.astro';
+import ListaEnlaces from '../../components/ListaEnlaces.astro';
+import PorQueNosotros from '../../components/PorQueNosotros.astro';
+import Proceso from '../../components/Proceso.astro';
+import PreguntasFrecuentes from '../../components/PreguntasFrecuentes.astro';
+import CtaFinal from '../../components/CtaFinal.astro';
+import { negocio, municipios } from '../../lib/datos';
+import { servicios, zonas, serviciosDeZona, rutas, type Zona } from '../../lib/contenido';
+import { seo } from '../../lib/plantillas';
+import { grafo, migas as migasSchema, faq, listaServicios } from '../../lib/schema';
+
+export const getStaticPaths = (async () => {
+  const lista = await zonas();
+  return lista.map((z) => ({ params: { zona: z.id }, props: { z } }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  z: Zona;
+}
+const { z } = Astro.props;
+const d = z.data;
+const { Content } = await render(z);
+const p = seo('area-hub', { zona: d.nombre, gancho: d.gancho });
+
+const todos = await servicios();
+const conPagina = await serviciosDeZona(z.id);
+const resto = todos.filter((s) => !conPagina.some((c) => c.id === s.id));
+const tarjetas = [
+  ...conPagina.map((s) => ({
+    nombre: `${s.data.nombre} en ${d.nombre}`,
+    resumen: s.data.resumen,
+    icono: s.data.icono,
+    href: rutas.landing(s.id, z.id),
+    etiqueta: `Ver en ${d.nombre}`,
+  })),
+  ...resto.map((s) => ({ nombre: s.data.nombre, resumen: s.data.resumen, icono: s.data.icono, href: rutas.servicio(s.id) })),
+];
+
+// Zonas cercanas: con página propia → enlace; sin página → solo el nombre
+const todasZonas = await zonas();
+const otrasConPagina = todasZonas.filter((x) => x.id !== z.id);
+const cercanasConPagina = otrasConPagina.filter((x) => d.cercanas.includes(x.id));
+const otrasOrdenadas = [...cercanasConPagina, ...otrasConPagina.filter((x) => !d.cercanas.includes(x.id))];
+const cercanasSinPagina = d.cercanas
+  .filter((slug) => !todasZonas.some((x) => x.id === slug))
+  .map((slug) => municipios.find((m) => m.slug === slug)?.nombre)
+  .filter((n): n is string => Boolean(n));
+const enlacesZonas = [
+  ...otrasOrdenadas.map((x) => ({ texto: `Reformas en ${x.data.nombre}`, href: rutas.zona(x.id) })),
+  { texto: `Reformas en ${negocio.ciudad}`, href: rutas.home },
+];
+
+const ruta = rutas.zona(z.id);
+const migas = [
+  { nombre: 'Inicio', ruta: rutas.home },
+  { nombre: 'Zonas', ruta: rutas.zonas },
+  { nombre: d.nombre, ruta },
+];
+const mensajeWa = `Hola, quiero pedir presupuesto para una reforma en ${d.nombre}.`;
+const puntos = negocio.garantias.slice(0, 3).map((g) => g.titulo);
+const schema = grafo([
+  migasSchema(migas),
+  faq(d.faqs),
+  listaServicios(
+    `Servicios de reformas en ${d.nombre}`,
+    tarjetas.map((t) => ({ nombre: t.nombre, ruta: t.href })),
+  ),
+]);
+---
+
+<Base title={p.title} description={p.description} ruta={ruta} schema={schema} tipo="area-hub" mensajeWa={mensajeWa} noindex={d.pendiente}>
+  {
+    p.secciones.map((sec, i) => {
+      const alt = i % 2 === 1;
+      switch (sec) {
+        case 'hero':
+          return <Hero h1={p.h1} texto={d.gancho} migas={migas} puntos={puntos} mensajeWa={mensajeWa} />;
+        case 'contenido-local':
+          return (
+            <Seccion id="contenido-local" alt={alt}>
+              <div class="prosa">
+                <Content />
+              </div>
+            </Seccion>
+          );
+        case 'servicios-zona':
+          return (
+            <Seccion
+              id="servicios-zona"
+              titulo={`Servicios de reformas en ${d.nombre}`}
+              intro={`Estos son los trabajos que hacemos en ${d.nombre}. Los primeros tienen página propia con información del pueblo.`}
+              alt={alt}
+            >
+              <RejillaServicios items={tarjetas} />
+            </Seccion>
+          );
+        case 'por-que-nosotros':
+          return <PorQueNosotros alt={alt} />;
+        case 'proceso':
+          return <Proceso titulo={`Cómo trabajamos en ${d.nombre}`} ayuntamiento={`el ${d.ayuntamiento}`} alt={alt} />;
+        case 'faq':
+          return <PreguntasFrecuentes titulo={`Preguntas frecuentes sobre reformas en ${d.nombre}`} preguntas={d.faqs} alt={alt} />;
+        case 'zonas-cercanas':
+          return (
+            <ListaEnlaces
+              id="zonas-cercanas"
+              titulo={cercanasConPagina.length ? `Pueblos cercanos a ${d.nombre}` : 'Otras zonas donde trabajamos'}
+              enlaces={enlacesZonas}
+              nota={
+                cercanasSinPagina.length
+                  ? `Cerca de ${d.nombre} también trabajamos en ${cercanasSinPagina.join(', ')}.`
+                  : undefined
+              }
+              alt={alt}
+            />
+          );
+        case 'cta-final':
+          return (
+            <CtaFinal titulo={`Presupuesto gratis para tu reforma en ${d.nombre}`} zona={d.nombre} mensajeWa={mensajeWa} alt={alt} />
+          );
+        default:
+          throw new Error(`La plantilla area-hub pide la sección "${sec}", que no existe en esta página`);
+      }
+    })
+  }
+</Base>

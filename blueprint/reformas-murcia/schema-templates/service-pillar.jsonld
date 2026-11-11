@@ -1,0 +1,33 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "name": "{{servicio}} en {{ciudad}}",
+      "serviceType": "{{servicio}}",
+      "description": "{{resumen}}",
+      "url": "{{url}}",
+      "provider": {
+        "@type": "GeneralContractor",
+        "@id": "{{dominio}}/#negocio",
+        "name": "{{marca}}",
+        "telephone": "{{telefono_e164}}"
+      },
+      "areaServed": [
+        { "@type": "City", "name": "{{ciudad}}" }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "{{dominio}}/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "{{pregunta}}", "acceptedAnswer": { "@type": "Answer", "text": "{{respuesta}}" } }
+      ]
+    }
+  ]
+}

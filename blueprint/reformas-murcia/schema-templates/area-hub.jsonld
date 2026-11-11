@@ -1,0 +1,24 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ItemList",
+      "name": "Servicios de reformas en {{zona}}",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "item": { "@type": "Service", "name": "{{servicio}}", "url": "{{url}}" } }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "{{dominio}}/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "{{pregunta}}", "acceptedAnswer": { "@type": "Answer", "text": "{{respuesta}}" } }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "origen": "Competencia analizada el 2026-11-10 (PageSpeed móvil): mejor LCP 3,4 s (reformasmartinez.com), mediana 7,5 s, peor 32,3 s. El objetivo es jugar claramente por encima.",
+  "lighthouse_min": {
+    "performance": 0.9,
+    "accessibility": 0.95,
+    "best-practices": 0.95,
+    "seo": 1
+  },
+  "metricas_max": {
+    "largest-contentful-paint": 2500,
+    "cumulative-layout-shift": 0.1,
+    "total-blocking-time": 200,
+    "first-contentful-paint": 1800
+  },
+  "recursos_max_kb": {
+    "html_por_pagina": 90,
+    "css_total": 40,
+    "js_total": 15,
+    "imagen_individual": 200
+  }
+}

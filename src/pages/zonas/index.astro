@@ -1,0 +1,39 @@
+---
+// Listado de zonas (/zonas/)
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/Hero.astro';
+import ZonasRegion from '../../components/ZonasRegion.astro';
+import CtaFinal from '../../components/CtaFinal.astro';
+import { negocio, contacto, municipios } from '../../lib/datos';
+import { zonas, rutas } from '../../lib/contenido';
+import { grafo, migas as migasSchema } from '../../lib/schema';
+
+const lista = await zonas();
+const migas = [
+  { nombre: 'Inicio', ruta: rutas.home },
+  { nombre: 'Zonas', ruta: rutas.zonas },
+];
+const destacadas = [
+  { texto: `Reformas en ${negocio.ciudad}`, href: rutas.home, detalle: 'Ciudad de Murcia y pedanías' },
+  ...lista.map((z) => ({ texto: `Reformas en ${z.data.nombre}`, href: rutas.zona(z.id), detalle: z.data.gancho })),
+];
+const resto = municipios.filter((m) => m.nombre !== negocio.ciudad && !lista.some((z) => z.id === m.slug)).map((m) => m.nombre);
+const mensajeWa = 'Hola, quiero pedir presupuesto para una reforma.';
+---
+
+<Base
+  title={`Reformas en ${negocio.ciudad} y pueblos de la región | ${negocio.marca}`}
+  description={`Hacemos reformas en ${negocio.ciudad} y en los pueblos de la ${negocio.region}: Molina de Segura, Alcantarilla, Ceutí y más. Presupuesto gratis: ${contacto.telefonoVisible}.`}
+  ruta={rutas.zonas}
+  schema={grafo([migasSchema(migas)])}
+  mensajeWa={mensajeWa}
+>
+  <Hero
+    h1={`Reformas en ${negocio.ciudad} y pueblos de la región`}
+    texto={`Trabajamos en ${negocio.ciudad} capital y en los pueblos de la ${negocio.region}. Los pueblos con página propia tienen información local: tipo de vivienda, trámites con el ayuntamiento y servicios.`}
+    migas={migas}
+    mensajeWa={mensajeWa}
+  />
+  <ZonasRegion titulo="Dónde trabajamos" destacadas={destacadas} resto={resto} alt />
+  <CtaFinal mensajeWa={mensajeWa} />
+</Base>

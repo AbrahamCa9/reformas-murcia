@@ -1,0 +1,167 @@
+---
+// Pie: datos de contacto (NAP idéntico al de la ficha de Google), servicios, zonas y legales.
+import Icono from './Icono.astro';
+import { negocio, contacto } from '../lib/datos';
+import { servicios, zonas, rutas } from '../lib/contenido';
+
+const lista = await servicios();
+const listaZonas = await zonas();
+const anio = new Date().getFullYear();
+---
+
+<footer class="pie">
+  <div class="contenedor rejilla-pie">
+    <div>
+      <p class="pie-marca">{negocio.marca}</p>
+      <p>{negocio.eslogan}.</p>
+      <ul class="pie-contacto">
+        <li>
+          <a href={contacto.telefonoHref}><Icono nombre="telefono" tam={18} /> {contacto.telefonoVisible}</a>
+        </li>
+        {
+          contacto.whatsappHref && (
+            <li>
+              <a href={contacto.whatsappHref} target="_blank" rel="noopener">
+                <Icono nombre="whatsapp" tam={18} /> WhatsApp
+              </a>
+            </li>
+          )
+        }
+        <li>
+          <a href={`mailto:${contacto.email}`}><Icono nombre="email" tam={18} /> {contacto.email}</a>
+        </li>
+        <li>
+          <span><Icono nombre="mapa" tam={18} /> {negocio.ciudad}, {negocio.region}</span>
+        </li>
+      </ul>
+    </div>
+
+    <nav aria-label="Servicios">
+      <p class="pie-titulo">Servicios</p>
+      <ul class="pie-servicios">
+        {
+          lista.map((s) => (
+            <li>
+              <a href={rutas.servicio(s.id)}>{s.data.nombre}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div>
+      <nav aria-label="Zonas">
+        <p class="pie-titulo">Zonas</p>
+        <ul>
+          <li><a href={rutas.home}>Reformas en {negocio.ciudad}</a></li>
+          {
+            listaZonas.map((z) => (
+              <li>
+                <a href={rutas.zona(z.id)}>Reformas en {z.data.nombre}</a>
+              </li>
+            ))
+          }
+          <li><a href={rutas.zonas}>Todas las zonas</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Empresa">
+        <p class="pie-titulo">Empresa</p>
+        <ul>
+          <li><a href={rutas.sobreNosotros}>Sobre nosotros</a></li>
+          <li><a href={rutas.contacto}>Contacto y presupuesto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <div class="contenedor pie-legal">
+    <p>© {anio} {negocio.marca}</p>
+    <ul>
+      <li><a href={rutas.avisoLegal}>Aviso legal</a></li>
+      <li><a href={rutas.privacidad}>Política de privacidad</a></li>
+      <li><a href={rutas.cookies}>Política de cookies</a></li>
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .pie {
+    padding-top: 3rem;
+    background: #111827;
+    color: #d1d5db;
+    font-size: 0.97rem;
+  }
+  .pie a {
+    color: #fff;
+    text-decoration: none;
+  }
+  .pie a:hover {
+    color: #fdba74;
+    text-decoration: underline;
+  }
+  .rejilla-pie {
+    display: grid;
+    gap: 2rem;
+    padding-bottom: 2.5rem;
+  }
+  .pie ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .pie li {
+    padding: 0.2rem 0;
+  }
+  .pie-marca {
+    margin: 0 0 0.25rem;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 800;
+  }
+  .pie-titulo {
+    margin: 0 0 0.5rem;
+    color: #9ca3af;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  nav + nav {
+    margin-top: 1.5rem;
+  }
+  .pie-contacto a,
+  .pie-contacto span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 36px;
+  }
+  .pie-legal {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+    padding-block: 1.25rem;
+    border-top: 1px solid #374151;
+    color: #9ca3af;
+    font-size: 0.9rem;
+  }
+  .pie-legal p {
+    margin: 0;
+  }
+  .pie-legal ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+  }
+  @media (min-width: 48rem) {
+    .rejilla-pie {
+      grid-template-columns: 1.2fr 1.6fr 1fr;
+    }
+    .pie-servicios {
+      columns: 2;
+      column-gap: 1.5rem;
+    }
+  }
+</style>
