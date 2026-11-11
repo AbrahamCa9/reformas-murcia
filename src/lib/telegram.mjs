@@ -1,6 +1,7 @@
 // Avisos por Telegram (cada presupuesto del formulario llega también al móvil).
 // El token y el chat NUNCA van en el repo: son secretos de GitHub (TELEGRAM_BOT_TOKEN y TELEGRAM_CHAT_ID)
 // y solo los recibe el build del despliegue a Hostinger, que los escribe en api/config.php.
+// En la demo de Vercel los lee en el servidor la función api/presupuesto.js (variables de entorno de Vercel).
 
 /**
  * Datos de Telegram para este build, o null si los avisos no se activan.

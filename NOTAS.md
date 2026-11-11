@@ -24,6 +24,17 @@
 7. Hosting: Hostinger + secretos FTP en GitHub + variable `DEPLOY_ENABLED=true`.
 8. Ficha de Google Business Profile con el mismo nombre, teléfono y web.
 
+## Demo en Vercel con formulario a Telegram
+
+En Vercel el formulario va a `api/presupuesto.js` y manda el aviso por Telegram (sin correo).
+Para que funcione:
+
+1. Vercel → proyecto → Settings → Environment Variables: `TELEGRAM_BOT_TOKEN` y `TELEGRAM_CHAT_ID`
+   (marca Preview y Production) y vuelve a desplegar.
+2. Para tener un enlace fijo y abierto como el del profesor: Settings → Environments → Production →
+   Branch Tracking, rama `borrador`. Así `reformas-murcia.vercel.app` muestra la demo (siempre con noindex).
+3. Si el enlace pide iniciar sesión en Vercel: Settings → Deployment Protection → Vercel Authentication desactivado.
+
 ## Telegram (opcional, ya programado)
 
 Cada presupuesto del formulario te llega también por Telegram, y te avisa al publicar y en la revisión semanal.

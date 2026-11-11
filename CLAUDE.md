@@ -20,7 +20,9 @@ automático impide publicar páginas flojas.
 5. Responde al usuario en español, en pasos cortos y numerados (tiene TDAH: una idea por bloque).
 6. Al terminar una sesión, avisa si quedan commits sin subir.
 7. **Secretos** (FTP, token de Telegram): solo en GitHub → Settings → Secrets and variables → Actions.
-   Nunca en el repo (es público), ni en la memoria, ni en Vercel (Vercel serviría `api/config.php` como texto).
+   Nunca en el repo (es público) ni en la memoria. En Vercel solo como variables de entorno para la demo
+   (las lee la función `api/presupuesto.js` en el servidor); el build nunca las escribe en `api/config.php`,
+   porque Vercel lo serviría como texto.
 
 ## Dónde está cada cosa
 
@@ -36,6 +38,7 @@ automático impide publicar páginas flojas.
 | Datos verificados de pueblos | `data/zonas/` |
 | Investigación de competencia (Fases 1-3) | `data/local-pack/`, `data/web-patterns/`, `data/patterns/` |
 | Formulario (PHP para Hostinger) | `public/api/contacto.php` (+ `api/config.php` que genera el build) |
+| Formulario en la demo de Vercel (solo Telegram) | `api/presupuesto.js` (función de Vercel; el formulario la usa cuando el build es de Vercel) |
 | Avisos por Telegram (presupuestos, publicación, revisión semanal) | secretos `TELEGRAM_BOT_TOKEN` y `TELEGRAM_CHAT_ID` → `src/lib/telegram.mjs`, `scripts/avisar-telegram.mjs`; prueba: workflow «Probar Telegram» |
 | .htaccess (HTTPS, 301, caché) | lo genera `integrations/hostinger.mjs` en cada build |
 

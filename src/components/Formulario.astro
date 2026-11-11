@@ -1,5 +1,6 @@
 ---
 // Formulario de presupuesto → public/api/contacto.php (Hostinger).
+// En la demo de Vercel (no ejecuta PHP) va a api/presupuesto.js, que solo avisa por Telegram.
 // Antispam sin servicios externos: campo trampa + tiempo mínimo de relleno.
 // El botón de WhatsApp compone el mensaje con lo que la persona haya escrito.
 import Icono from './Icono.astro';
@@ -14,10 +15,12 @@ interface Props {
 const { servicio, zona, mensajeWa } = Astro.props;
 const lista = await servicios();
 const waBase = contacto.whatsappHref;
+const enVercel = Boolean(process.env.VERCEL);
+const accion = enVercel ? '/api/presupuesto' : '/api/contacto.php';
 const responsable = negocio.legal.titular.startsWith('[') ? negocio.marca : negocio.legal.titular;
 ---
 
-<form class="formulario tarjeta" method="post" action="/api/contacto.php" data-formulario>
+<form class="formulario tarjeta" method="post" action={accion} data-formulario>
   <h3>Cuéntanos tu obra</h3>
   <p class="ayuda">Te llamamos para concretar la visita. Los campos con * son obligatorios.</p>
 
@@ -111,7 +114,11 @@ const responsable = negocio.legal.titular.startsWith('[') ? negocio.marca : nego
   {
     !INDEXAR && (
       <p class="aviso-pruebas">
-        Versión de pruebas: el formulario solo envía correos en el hosting final. Para probar, usa WhatsApp o el teléfono.
+        {
+          enVercel
+            ? 'Versión demo: el formulario envía la solicitud por Telegram. El correo solo funciona en el hosting final.'
+            : 'Versión de pruebas: el formulario solo envía correos en el hosting final. Para probar, usa WhatsApp o el teléfono.'
+        }
       </p>
     )
   }
